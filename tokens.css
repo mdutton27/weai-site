@@ -1,0 +1,376 @@
+/* ============================================================
+   WE AI — Brand Tokens (v2)
+   Source palette (user-supplied formal palette):
+     Teal-1   #008080   Teal-2  #00A3A3   Teal-3  #008080
+     Teal-5   #008600   (note: per palette card; we treat as deep teal accent)
+     Gold-1   #DAA520   Gold-2  #DAA520
+     Deep-7   #000160   White   #FFFFFF
+   Logo gradients use ranges from #0c3e48 → #1fa9b3 (teal)
+   and #be9a60 → #edd197 (gold/cream).
+
+   This file is the single source of truth for the WE AI brand
+   moving forward. All deliverables import from this.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   F-glyph swap — every f/F in upright Fraunces gets rendered
+   from Cormorant Garamond instead. Implemented via a unicode-
+   range @font-face: the browser tries the "Fraunces F-swap"
+   family first; it only contains U+0046 (F) and U+0066 (f),
+   so the browser falls through to real Fraunces for every
+   other character.
+   ============================================================ */
+@font-face {
+  font-family: 'Fraunces F-swap';
+  font-style: normal;
+  font-weight: 100 900;
+  src: local('Cormorant Garamond'),
+       url('https://fonts.gstatic.com/s/cormorantgaramond/v16/U1P2dr_Au5GkpFvJfSlYwQuPyG-iSgiECoNb6oxRNWmgdLp1.woff2') format('woff2');
+  unicode-range: U+0046, U+0066;
+}
+@font-face {
+  font-family: 'Fraunces F-swap';
+  font-style: italic;
+  font-weight: 100 900;
+  src: local('Cormorant Garamond Italic'),
+       url('https://fonts.gstatic.com/s/cormorantgaramond/v16/U1P3dr_Au5GkpFvJfSlYwQuPyG-iSgiECoNbaooNUmqgdLpQwLp1.woff2') format('woff2');
+  unicode-range: U+0046, U+0066;
+}
+
+:root {
+  color-scheme: light;
+
+  /* ============================================================
+     CORE PALETTE — exact user-supplied colors
+     ============================================================ */
+  --teal-1:    #008080;   /* core teal */
+  --teal-2:    #00A3A3;   /* bright teal */
+  --teal-deep: #003E47;   /* derived deep teal — anchor */
+  --teal-ink:  #001E22;   /* near-black teal — body ink on light */
+  --teal-mid:  #005A5F;   /* hover / mid */
+  --teal-soft: #4FB8BE;   /* highlight */
+  --teal-tint: #E0F0F0;   /* tint */
+  --teal-wash: #F2F8F8;   /* page wash */
+
+  --gold-1:    #DAA520;   /* core gold (user palette) */
+  --gold-2:    #C68F18;   /* hover / deeper */
+  --gold-soft: #E8C875;   /* light gold */
+  --gold-cream:#EDD197;   /* cream highlight (matches logo gradient) */
+  --gold-tint: #FBF1D9;   /* tint */
+  --gold-deep: #8A6312;   /* deep gold for emphasis on light */
+
+  --deep-7:    #000160;   /* deep navy from palette — used sparingly */
+
+  /* Neutrals — slightly warm, sit with teal+gold */
+  --ink-900:   #0A0F10;
+  --ink-800:   #131C1E;
+  --ink-700:   #2A3539;
+  --ink-500:   #5C6A6C;
+  --ink-400:   #8A9698;
+  --ink-300:   #BDC6C7;
+  --ink-200:   #D9DFDF;
+  --ink-100:   #ECEFEF;
+  --ink-50:    #F6F7F7;
+
+  --paper:     #F8F5EE;   /* warm off-white — boutique stationery feel */
+  --paper-cool:#F4F7F6;
+  --bone:      #EDE6D5;   /* warmer paper for accent sections */
+  --white:     #FFFFFF;
+
+  /* ============================================================
+     SEMANTIC TOKENS
+     ============================================================ */
+  --bg-page:        var(--paper);
+  --bg-surface:     var(--white);
+  --bg-surface-alt: var(--ink-50);
+  --bg-inverse:     var(--teal-ink);
+  --bg-inverse-2:   var(--teal-deep);
+
+  --fg-1:        var(--teal-ink);    /* headlines */
+  --fg-2:        var(--ink-700);     /* body */
+  --fg-3:        var(--ink-500);     /* captions */
+  --fg-muted:    var(--ink-400);
+  --fg-on-dark:  #F4EFDF;            /* warm off-white on teal */
+  --fg-on-dark-2:rgba(244, 239, 223, 0.68);
+
+  --brand:        var(--teal-deep);
+  --brand-2:      var(--teal-1);
+  --brand-hover:  var(--teal-mid);
+  --accent:       var(--gold-1);
+  --accent-hover: var(--gold-2);
+  --accent-soft:  var(--gold-soft);
+
+  --border:        var(--ink-200);
+  --border-strong: var(--ink-300);
+  --border-on-dark:rgba(244, 239, 223, 0.14);
+  --ring:          0 0 0 3px rgba(218, 165, 32, 0.35);
+
+  /* ============================================================
+     TYPE — Fraunces (display serif, opsz/soft) + Geist (UI sans)
+     The serif gives boutique-consultancy gravitas; Geist is a
+     modern, slightly geometric sans for body / UI.
+     ============================================================ */
+  --font-display: 'Fraunces F-swap', 'Fraunces', 'Times New Roman', Georgia, serif;
+  --font-italic:  'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Modular scale — 1.25 ratio with display jumps */
+  --fs-micro:   11px;
+  --fs-caption: 13px;
+  --fs-small:   14px;
+  --fs-body:    16px;
+  --fs-lead:    19px;
+  --fs-h5:      22px;
+  --fs-h4:      28px;
+  --fs-h3:      36px;
+  --fs-h2:      48px;
+  --fs-h1:      72px;
+  --fs-display: 104px;
+  --fs-mega:    144px;
+
+  --lh-tight:   1.04;
+  --lh-snug:    1.18;
+  --lh-normal:  1.55;
+  --lh-loose:   1.7;
+
+  --ls-mega:    -0.045em;
+  --ls-tight:   -0.025em;
+  --ls-snug:    -0.012em;
+  --ls-wide:    0.04em;
+  --ls-caps:    0.18em;
+
+  /* ============================================================
+     SPACING — 4px base
+     ============================================================ */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 20px;  --sp-6: 24px;  --sp-8: 32px;  --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+  --sp-32: 128px; --sp-40: 160px;
+
+  /* ============================================================
+     RADII / SHADOWS
+     ============================================================ */
+  --r-xs: 2px; --r-sm: 4px; --r-md: 8px; --r-lg: 14px;
+  --r-xl: 20px; --r-2xl: 28px; --r-full: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 30, 34, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0, 30, 34, 0.08), 0 1px 2px rgba(0, 30, 34, 0.05);
+  --shadow-md: 0 12px 28px rgba(0, 30, 34, 0.10), 0 3px 8px rgba(0, 30, 34, 0.06);
+  --shadow-lg: 0 32px 64px rgba(0, 30, 34, 0.16), 0 8px 16px rgba(0, 30, 34, 0.08);
+  --shadow-glow: 0 0 0 1px rgba(218, 165, 32, 0.20), 0 18px 36px rgba(0, 30, 34, 0.16);
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-elastic:cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:  140ms;
+  --dur-base:  280ms;
+  --dur-slow:  520ms;
+  --dur-xslow: 900ms;
+
+  /* Layout */
+  --container: 1240px;
+  --container-narrow: 920px;
+  --container-wide: 1440px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg-2);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, .display-serif {
+  font-family: var(--font-display);
+  color: var(--fg-1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: 400;          /* Fraunces is most beautiful at 400 */
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); font-weight: 500; }
+h5 { font-size: var(--fs-h5); font-weight: 500; }
+
+.display { font-size: var(--fs-display); font-weight: 400; letter-spacing: var(--ls-mega); }
+.mega    { font-size: var(--fs-mega);    font-weight: 300; letter-spacing: var(--ls-mega); }
+
+p { margin: 0; line-height: var(--lh-normal); text-wrap: pretty; }
+.lead { font-size: var(--fs-lead); line-height: 1.5; color: var(--fg-2); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: 500;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+}
+
+.eyebrow.no-rule::before { display: none; }
+.eyebrow.on-dark { color: var(--gold-soft); }
+
+.micro {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.container       { max-width: var(--container);        margin: 0 auto; padding: 0 var(--sp-8); }
+.container-narrow{ max-width: var(--container-narrow); margin: 0 auto; padding: 0 var(--sp-8); }
+.container-wide  { max-width: var(--container-wide);   margin: 0 auto; padding: 0 var(--sp-8); }
+
+.serif    { font-family: var(--font-display); }
+.italic   { font-style: italic; }
+.italic-serif { font-family: var(--font-display); font-style: italic; font-weight: 400; }
+
+/* The signature gold underline used as accent on key words */
+.gold-rule {
+  position: relative;
+  display: inline-block;
+}
+.gold-rule::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0.05em;
+  height: 0.18em;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-1) 40%, var(--gold-cream));
+  z-index: -1;
+  opacity: 0.85;
+  border-radius: 2px;
+}
+
+/* Gold gradient text fill — reserved for big serif words */
+.gold-text {
+  background: linear-gradient(120deg, #8A6312 0%, #DAA520 35%, #EDD197 70%, #C68F18 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.teal-text {
+  background: linear-gradient(120deg, #003E47 0%, #008080 50%, #00A3A3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 14px 22px;
+  border-radius: var(--r-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: var(--teal-deep);
+  color: var(--paper);
+}
+.btn-primary:hover { background: var(--teal-mid); }
+
+.btn-gold {
+  background: var(--gold-1);
+  color: var(--teal-ink);
+}
+.btn-gold:hover { background: var(--gold-2); color: var(--paper); }
+
+.btn-ghost {
+  background: transparent;
+  color: currentColor;
+  border-color: currentColor;
+  opacity: 0.85;
+}
+.btn-ghost:hover { opacity: 1; }
+
+.btn-link {
+  padding: 0;
+  background: transparent;
+  color: currentColor;
+  border-radius: 0;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* Arrow that nudges on hover */
+.btn .arr,
+.arr-link .arr {
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.btn:hover .arr,
+.arr-link:hover .arr { transform: translateX(4px); }
+
+/* Section padding */
+.section { padding: var(--sp-32) 0; }
+.section-sm { padding: var(--sp-20) 0; }
+
+@media (max-width: 760px) {
+  :root {
+    --fs-h1: 44px;
+    --fs-h2: 32px;
+    --fs-h3: 26px;
+    --fs-display: 64px;
+    --fs-mega: 88px;
+  }
+  .section { padding: var(--sp-20) 0; }
+}
+
+/* Selection */
+::selection { background: var(--gold-1); color: var(--teal-ink); }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

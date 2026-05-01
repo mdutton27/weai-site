@@ -1,0 +1,2140 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#003E47" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000C0E" media="(prefers-color-scheme: dark)">
+
+<script>
+  // Apply theme before first paint to avoid flicker.
+  // Default is teal; a saved override (from clicking the nav toggle) wins.
+  (function () {
+    var theme = 'teal';
+    try {
+      var saved = localStorage.getItem('weai-theme');
+      if (saved === 'dark' || saved === 'teal' || saved === 'light') theme = saved;
+    } catch (e) {}
+    if (theme === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
+<title>WE AI — A field guide to practical AI for New Zealand business</title>
+<meta name="description" content="WE AI is a boutique AI consultancy building working AI for New Zealand's owner-operators, GMs and founders — not strategy decks.">
+<link rel="canonical" href="https://weai.co.nz/">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon-weai.svg">
+<link rel="apple-touch-icon" href="/assets/favicon-weai.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WE AI">
+<meta property="og:title" content="WE AI — Practical AI for New Zealand business">
+<meta property="og:description" content="A boutique consultancy building working AI for New Zealand's owner-operators, GMs and founders — not strategy decks.">
+<meta property="og:url" content="https://weai.co.nz/">
+<meta property="og:image" content="https://weai.co.nz/assets/favicon-weai.svg">
+<meta property="og:locale" content="en_NZ">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WE AI — Practical AI for New Zealand business">
+<meta name="twitter:description" content="A boutique consultancy building working AI for New Zealand's owner-operators, GMs and founders — not strategy decks.">
+<meta name="twitter:image" content="https://weai.co.nz/assets/favicon-weai.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  :root {
+    /* DARK (default) */
+    --night: #000C0E;
+    --night-2: #001418;
+    --ink-fg: #F4EFDF;            /* warm off-white — base for all rule/text mixes */
+    --nav-bg: rgba(0, 12, 14, 0.85);
+    --picker-shell: rgba(0, 30, 34, 0.6);
+    --pr-right-bg: rgba(0, 12, 14, 0.6);
+    --how-bg: var(--paper);
+    --how-ink: var(--teal-ink);
+    --how-eyebrow: var(--gold-deep);
+    --how-circle-bg: var(--paper);
+    --teal-line: rgba(79, 184, 190, 0.55);
+    --gold-line: rgba(218, 165, 32, 0.85);
+    --logo-we-fill: rgba(79, 184, 190, 0.08);
+    --logo-ai-fill: rgba(218, 165, 32, 0.08);
+    --gold-glow-1: rgba(218, 165, 32, 0.10);
+    --gold-glow-2: rgba(218, 165, 32, 0.12);
+    --gold-banner-bg: rgba(218, 165, 32, 0.04);
+    --gold-banner-border: rgba(218, 165, 32, 0.25);
+  }
+
+  /* LIGHT — pure white, teal ink. Literal hex (not var(--paper)) so this
+     theme renders identically in the host preview, which sometimes overrides
+     --paper to a dark noir for its own canvas. */
+  :root[data-theme="light"] {
+    --night: #FFFFFF;             /* pure white */
+    --night-2: #F5F7F7;           /* faint cool grey for gradient */
+    --paper: #FFFFFF;             /* re-pin */
+    --bone: #F0F2F2;              /* re-pin */
+    --ink-fg: #001E22;            /* teal-ink — base for all rule/text mixes */
+    --gold-cream: #8A6312;        /* gold-deep reads on light */
+    --fg-on-dark: #001E22;
+    --nav-bg: rgba(255, 255, 255, 0.92);
+    --picker-shell: #F8FAFA;
+    --pr-right-bg: #F8FAFA;
+    --how-bg: #001E22;            /* invert: how-section is dark on white theme */
+    --how-ink: #F4EFDF;
+    --how-eyebrow: #EDD197;
+    --how-circle-bg: #001E22;
+    --gold-deep: #8A6312;         /* re-pin for stat numbers etc. */
+    --logo-we-fill: rgba(79, 184, 190, 0.10);
+    --logo-ai-fill: rgba(218, 165, 32, 0.10);
+    --teal-line: rgba(79, 184, 190, 0.85);
+    --gold-line: rgba(237, 209, 151, 0.85);
+    --gold-glow-1: rgba(218, 165, 32, 0.10);
+    --gold-glow-2: rgba(218, 165, 32, 0.12);
+    --gold-banner-bg: rgba(218, 165, 32, 0.08);
+    --gold-banner-border: rgba(138, 99, 18, 0.30);
+  }
+
+  /* TEAL — deep teal background, cream text, gold accents */
+  :root[data-theme="teal"] {
+    --night: #003E47;             /* teal-deep */
+    --night-2: #00565F;           /* slightly lifted teal */
+    --paper: #F8F5EE;             /* re-pin so the "How" block stays paper */
+    --bone: #EDE6D5;
+    --teal-ink: #001E22;
+    --gold-deep: #8A6312;
+    --ink-fg: #F4EFDF;
+    --nav-bg: rgba(0, 62, 71, 0.88);
+    --picker-shell: rgba(0, 30, 34, 0.55);
+    --pr-right-bg: rgba(0, 30, 34, 0.55);
+    --how-bg: var(--paper);
+    --how-ink: var(--teal-ink);
+    --how-eyebrow: var(--gold-deep);
+    --how-circle-bg: var(--paper);
+    --teal-line: rgba(79, 184, 190, 0.85);  /* bright teal — matches dark */
+    --gold-line: rgba(237, 209, 151, 0.85);
+    --logo-we-fill: rgba(79, 184, 190, 0.10);
+    --logo-ai-fill: rgba(218, 165, 32, 0.10);
+    --gold-glow-1: rgba(218, 165, 32, 0.14);
+    --gold-glow-2: rgba(218, 165, 32, 0.16);
+    --gold-banner-bg: rgba(218, 165, 32, 0.07);
+    --gold-banner-border: rgba(237, 209, 151, 0.35);
+  }
+
+  body { background: var(--night); color: var(--fg-on-dark); font-family: var(--font-body); overflow-x: hidden; transition: background 320ms ease, color 320ms ease; }
+  .page { max-width: 1480px; margin: 0 auto; padding: 0 48px; }
+  ::selection { background: var(--gold-1); color: var(--night); }
+
+  /* Disable Fraunces' aggressive fi/fl ligatures + italic swash f-tails globally —
+     they fuse the dotless f+i into a single melted glyph at large sizes. */
+  body, h1, h2, h3, h4, h5, h6, p, em, strong, span, div, text, .word-mark text, .nav-logo svg text, footer .wm-svg text {
+    font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0, "swsh" 0, "salt" 0, "ss01" 0, "ss02" 0, "ss03" 0;
+    font-variant-ligatures: none;
+  }
+
+  /* All italic display text → Cormorant Garamond (calm italic, tame f).
+     Fraunces stays for everything upright. */
+  em, i,
+  .hero-tag, .hero-lead em,
+  .manifesto .signoff .sig,
+  .picker-head h2 em, .ways-head h2 em, .how-head h2 em, .believe-head h2 em,
+  .ethics-head h2 em, .integrity-head h3 em, .close-cta h2 em,
+  .step-num, .case-visual .quote .qm,
+  .pcard li strong em, .pcard li em,
+  .nav-logo svg .ai, .word-mark .ai, footer .wm-svg .ai {
+    font-family: var(--font-italic), 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    padding: 24px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  }
+  /* ─── NAV WIREFRAME LOGO ─── */
+  .nav-logo {
+    display: flex; align-items: center;
+    text-decoration: none;
+    line-height: 0;
+  }
+  .nav-logo svg {
+    height: 44px;
+    width: auto;
+    overflow: visible;
+    display: block;
+  }
+  .nav-logo svg text {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 120px;
+    letter-spacing: -0.04em;
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke;
+  }
+  .nav-logo svg .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
+  .nav-logo svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
+  /* once-only signature draw */
+  .nav-logo svg .draw {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: navDraw 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .nav-logo svg .draw.ai { animation-delay: 0.4s; }
+  @keyframes navDraw { to { stroke-dashoffset: 0; } }
+  .nav-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+    display: flex; gap: 28px;
+  }
+  .nav-cta {
+    background: var(--gold-1);
+    color: var(--night);
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 200ms ease;
+  }
+  .nav-cta:hover { background: var(--gold-cream); }
+
+  /* ─── NAV THEME TOGGLE ─── */
+  .nav-right {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .nav-theme {
+    width: 38px; height: 38px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent;
+    color: var(--ink-fg);
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 22%, transparent);
+    border-radius: 999px;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+  }
+  .nav-theme:hover {
+    border-color: var(--gold-cream);
+    color: var(--gold-cream);
+  }
+  .nav-theme:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.35);
+  }
+  .nav-theme svg { width: 16px; height: 16px; display: block; }
+  /* Default state shows the moon (we're in teal/light). Dark mode overrides. */
+  .nav-theme .icon-sun { display: none; }
+  .nav-theme .icon-moon { display: block; }
+  :root:not([data-theme]) .nav-theme .icon-sun,
+  :root[data-theme="dark"] .nav-theme .icon-sun { display: block; }
+  :root:not([data-theme]) .nav-theme .icon-moon,
+  :root[data-theme="dark"] .nav-theme .icon-moon { display: none; }
+
+  @media (max-width: 760px) {
+    .nav-meta { display: none; }
+  }
+
+  /* ─── HERO — wireframe letters ─── */
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 105px);
+    padding: 80px 0 120px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 50%, transparent);
+    padding-bottom: 32px;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  }
+  .hero-top .center { text-align: center; color: var(--gold-cream); }
+  .hero-top .right { text-align: right; }
+
+  /* The wireframe word-mark */
+  .word-mark {
+    position: relative;
+    margin: 80px 0 48px;
+    display: flex; justify-content: center; align-items: center;
+    pointer-events: none;
+  }
+  .word-mark svg {
+    width: 100%;
+    max-width: 1300px;
+    height: auto;
+    overflow: visible;
+  }
+  .word-mark text {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 360px;
+    letter-spacing: -0.04em;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke;
+  }
+  .word-mark .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
+  .word-mark .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
+
+  /* Light & teal themes — letters are darker than bg, so add a luminous outer
+     glow to recreate the "lit edge" feel that comes for free on dark. */
+  :root[data-theme="light"] .word-mark .we,
+  :root[data-theme="teal"] .word-mark .we {
+    filter:
+      drop-shadow(0 0 8px rgba(79, 184, 190, 0.55))
+      drop-shadow(0 0 22px rgba(79, 184, 190, 0.35));
+  }
+  :root[data-theme="light"] .word-mark .ai,
+  :root[data-theme="teal"] .word-mark .ai {
+    filter:
+      drop-shadow(0 0 8px rgba(218, 165, 32, 0.60))
+      drop-shadow(0 0 22px rgba(218, 165, 32, 0.40));
+  }
+  .word-mark text {
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: drawLetter 5.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .word-mark .ai { animation-delay: 0.8s; }
+  @keyframes drawLetter { to { stroke-dashoffset: 0; } }
+
+  .hero-tag {
+    text-align: center;
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 36px;
+    color: var(--gold-cream);
+    line-height: 1.3;
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 1.4s forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .hero-bottom {
+    margin-top: auto;
+    padding-top: 64px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+    padding-top: 40px;
+  }
+  .hero-lead {
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--fg-on-dark);
+    max-width: 640px;
+  }
+  .hero-lead em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold-cream);
+  }
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end;
+  }
+  .btn-gold {
+    background: var(--gold-1);
+    color: var(--night);
+    padding: 16px 28px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 200ms ease;
+    display: inline-flex; gap: 10px; align-items: center;
+  }
+  .btn-gold:hover { background: var(--gold-cream); }
+  .btn-out {
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 30%, transparent);
+    color: var(--fg-on-dark);
+    padding: 16px 28px;
+    border-radius: 999px;
+    font-size: 14px;
+    transition: border-color 200ms ease;
+  }
+  .btn-out:hover { border-color: var(--gold-cream); color: var(--gold-cream); }
+
+  /* ─── MANIFESTO (kept from V1) ─── */
+  .manifesto {
+    padding: 160px 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  }
+  .manifesto-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .manifesto .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .manifesto p {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.2vw, 64px);
+    line-height: 1.25;
+    color: var(--fg-on-dark);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+  .manifesto p em {
+    font-style: italic;
+    color: var(--gold-cream);
+  }
+  .manifesto p + p { margin-top: 48px; }
+  .manifesto .signoff {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+  }
+  .manifesto .signoff .sig {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 32px;
+    color: var(--fg-on-dark);
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+  .manifesto .signoff .sig em { color: var(--gold-cream); }
+
+  /* ═══ THE PICKER — "What would AI do for…" ═══ */
+  .picker-section {
+    padding: 160px 0;
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+    position: relative;
+    overflow: hidden;
+  }
+  .picker-section::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(900px 600px at 80% 20%, var(--gold-glow-1), transparent 60%);
+    pointer-events: none;
+  }
+  .picker-head {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+  }
+  .picker-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 32px;
+  }
+  .picker-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--fg-on-dark);
+  }
+  .picker-head h2 em {
+    font-style: italic;
+    color: var(--gold-cream);
+  }
+  .picker-head .deck {
+    margin-top: 24px;
+    font-size: 19px;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--ink-fg) 75%, transparent);
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .picker {
+    max-width: 1240px;
+    margin: 0 auto;
+    background: var(--picker-shell);
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+  .picker-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+  }
+  .picker-col {
+    padding: 32px 40px 28px;
+  }
+  .picker-col + .picker-col {
+    border-left: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+  }
+  .picker-col .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 18px;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .picker-col .label .num {
+    display: inline-flex;
+    width: 22px; height: 22px;
+    align-items: center; justify-content: center;
+    border: 1px solid var(--gold-1);
+    border-radius: 999px;
+    color: var(--gold-1);
+    font-size: 10px;
+  }
+  .chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .chip {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 18%, transparent);
+    color: color-mix(in oklab, var(--ink-fg) 80%, transparent);
+    font-family: var(--font-body);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 180ms ease;
+  }
+  .chip:hover {
+    border-color: var(--gold-cream);
+    color: var(--gold-cream);
+  }
+  .chip.active {
+    background: var(--gold-1);
+    color: var(--night);
+    border-color: var(--gold-1);
+  }
+
+  /* Result panel */
+  .picker-result {
+    padding: 48px 56px 56px;
+    min-height: 360px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 64px;
+    align-items: start;
+    transition: opacity 280ms ease;
+  }
+  .picker-result.fading { opacity: 0; }
+
+  .pr-left .pr-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 20px;
+  }
+  .pr-left .pr-title {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--fg-on-dark);
+    margin-bottom: 24px;
+  }
+  .pr-left .pr-title em {
+    font-style: italic;
+    color: var(--gold-cream);
+  }
+  .pr-left .pr-body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--ink-fg) 78%, transparent);
+    margin-bottom: 32px;
+  }
+  .pr-tools {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .pr-tools .tool {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 16%, transparent);
+    border-radius: 999px;
+    color: color-mix(in oklab, var(--ink-fg) 65%, transparent);
+  }
+
+  .pr-right {
+    background: var(--pr-right-bg);
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 24px;
+  }
+  .pr-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px 16px;
+    margin-bottom: 24px;
+  }
+  .pr-stat .v {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--gold-cream);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .pr-stat .v em { font-style: italic; }
+  .pr-stat .l {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 60%, transparent);
+  }
+  .pr-cta {
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .pr-cta a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    border-bottom: 1px solid var(--gold-cream);
+    padding-bottom: 2px;
+  }
+  .pr-cta .badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+  }
+
+  .picker-foot {
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+  }
+  .picker-foot .left { display: flex; gap: 18px; align-items: center; }
+  .picker-foot .left .dot {
+    width: 6px; height: 6px;
+    background: var(--gold-1); border-radius: 999px;
+    box-shadow: 0 0 12px var(--gold-1);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* ═══ FOUR WAYS TO START (kept from V2) ═══ */
+  .ways {
+    padding: 160px 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  }
+  .ways-head {
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px;
+    margin-bottom: 80px; align-items: end;
+  }
+  .ways-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 24px;
+  }
+  .ways-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--fg-on-dark);
+  }
+  .ways-head h2 em { font-style: italic; color: var(--gold-cream); }
+  .ways-head p {
+    font-size: 19px;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--ink-fg) 75%, transparent);
+    max-width: 560px;
+  }
+  .ways-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+  }
+  .way {
+    padding: 40px 32px;
+    border-right: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    min-height: 380px;
+    display: flex; flex-direction: column;
+    transition: background 200ms ease;
+    position: relative; overflow: hidden;
+  }
+  .way:last-child { border-right: 0; }
+  .way::before {
+    content: "";
+    position: absolute; left: 0; top: 0; height: 2px; width: 0;
+    background: var(--gold-1);
+    transition: width 600ms var(--ease-out);
+  }
+  .way:hover { background: color-mix(in oklab, var(--ink-fg) 3%, transparent); }
+  .way:hover::before { width: 100%; }
+  .way .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gold-cream);
+    letter-spacing: 0.18em;
+    margin-bottom: 32px;
+  }
+  .way h3 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--fg-on-dark);
+    margin-bottom: 16px;
+  }
+  .way h3 em { font-style: italic; color: var(--gold-cream); }
+  .way p { font-size: 14px; color: color-mix(in oklab, var(--ink-fg) 70%, transparent); line-height: 1.55; flex: 1; }
+  .way .meta {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+  }
+
+  /* ═══ HOW WE WORK — 1-2-3 (kept from V1) ═══ */
+  .how {
+    padding: 160px 0;
+    background: var(--how-bg);
+    color: var(--how-ink);
+    margin: 0 -48px;
+    padding-left: 48px; padding-right: 48px;
+  }
+  .how-inner { max-width: 1480px; margin: 0 auto; }
+  .how-head { margin-bottom: 80px; max-width: 800px; }
+  .how-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--how-eyebrow);
+    margin-bottom: 24px;
+  }
+  .how-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--how-ink);
+  }
+  .how-head h2 em { font-style: italic; color: var(--how-eyebrow); }
+  .how-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+    position: relative;
+  }
+  .how-steps::before {
+    content: "";
+    position: absolute;
+    top: 56px;
+    left: 8%; right: 8%;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--gold-1) 0, var(--gold-1) 6px, transparent 6px, transparent 12px);
+    opacity: 0.5;
+  }
+  .step {
+    position: relative;
+  }
+  .step .circle {
+    width: 112px; height: 112px;
+    border-radius: 999px;
+    background: var(--how-circle-bg);
+    border: 1.5px solid var(--gold-1);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--how-eyebrow);
+    margin-bottom: 32px;
+  }
+  .step h3 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--how-ink);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .step h3 em { font-style: italic; color: var(--gold-deep); }
+  .step p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-700);
+    margin-bottom: 16px;
+  }
+  .step .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  /* ═══ CASE — three days to three minutes (kept from V2) ═══ */
+  .case {
+    padding: 160px 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  }
+  .case-inner {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .case-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 24px;
+  }
+  .case h2 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: var(--fg-on-dark);
+    margin-bottom: 24px;
+  }
+  .case h2 em { font-style: italic; color: var(--gold-cream); }
+  .case .body { font-size: 19px; color: color-mix(in oklab, var(--ink-fg) 75%, transparent); line-height: 1.6; margin-bottom: 32px; }
+  .case-stats {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 32px;
+    padding-top: 32px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+  }
+  .case-stats .v {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--gold-cream);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .case-stats .v em { font-style: italic; }
+  .case-stats .l { margin-top: 8px; font-size: 14px; color: color-mix(in oklab, var(--ink-fg) 65%, transparent); }
+
+  .case-visual {
+    aspect-ratio: 4/5;
+    background: linear-gradient(165deg, #001E22, #00141A);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+  }
+  .case-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .case-visual .quote {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 40px;
+    color: var(--fg-on-dark);
+  }
+  .case-visual .quote .qm {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 96px;
+    line-height: 0.5;
+    color: var(--gold-cream);
+    margin-bottom: 24px;
+  }
+  .case-visual .quote .qt {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  .case-visual .quote .qa {
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+  }
+  .case-visual .pill {
+    position: absolute; top: 32px; left: 32px;
+    background: var(--gold-1);
+    color: var(--night);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* ═══ THINGS WE BELIEVE (kept from V2) ═══ */
+  .believe {
+    padding: 160px 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  }
+  .believe-head { margin-bottom: 64px; max-width: 800px; }
+  .believe-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 24px;
+  }
+  .believe-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--fg-on-dark);
+  }
+  .believe-head h2 em { font-style: italic; color: var(--gold-cream); }
+  .believe-list { border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent); }
+  .belief {
+    display: grid; grid-template-columns: 80px 1fr 2fr; gap: 32px;
+    padding: 36px 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    align-items: start;
+    transition: padding 220ms var(--ease-out);
+  }
+  .belief:hover { padding-left: 16px; padding-right: 16px; }
+  .belief .num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--gold-cream);
+  }
+  .belief h3 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--fg-on-dark);
+    line-height: 1.15;
+  }
+  .belief h3 em { font-style: italic; color: var(--gold-cream); }
+  .belief p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--ink-fg) 70%, transparent);
+    max-width: 560px;
+  }
+
+  /* ═══ ETHICS / AOTEAROA ═══ */
+  .ethics {
+    padding: 160px 0 180px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+    position: relative;
+    overflow: hidden;
+  }
+  .ethics::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(700px 500px at 85% 0%, rgba(79, 184, 190, 0.06), transparent 60%);
+    pointer-events: none;
+  }
+  .ethics-inner { position: relative; z-index: 1; }
+  .ethics-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 96px;
+    align-items: end;
+  }
+  .ethics-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 24px;
+  }
+  .ethics-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--fg-on-dark);
+  }
+  .ethics-head h2 em { font-style: italic; color: var(--gold-cream); }
+  .ethics-head .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--ink-fg) 72%, transparent);
+    max-width: 520px;
+  }
+  .ethics-head .lede em { font-style: italic; color: var(--gold-cream); }
+
+  /* Banner: AI is an accelerant */
+  .ethics-banner {
+    border: 1px solid var(--gold-banner-border);
+    border-left: 3px solid var(--gold-1);
+    padding: 32px 40px;
+    margin-bottom: 64px;
+    background: var(--gold-banner-bg);
+  }
+  .ethics-banner h3 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--fg-on-dark);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .ethics-banner h3 em { font-style: italic; color: var(--gold-cream); }
+  .ethics-banner p {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--ink-fg) 72%, transparent);
+    max-width: 760px;
+  }
+
+  /* FAIR + CARE side-by-side */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .pcard {
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    padding: 48px 40px;
+    background: color-mix(in oklab, var(--ink-fg) 2%, transparent);
+    display: flex; flex-direction: column;
+  }
+  .pcard.care {
+    background: linear-gradient(155deg, #00343a 0%, #001E22 100%);
+    border-color: rgba(79, 184, 190, 0.3);
+  }
+  .pcard .ptag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 50%, transparent);
+    margin-bottom: 16px;
+  }
+  .pcard.care .ptag { color: var(--gold-cream); }
+  .pcard h4 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--fg-on-dark);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+  .pcard h4 em { font-style: italic; color: var(--gold-cream); }
+  .pcard.care h4 em { color: var(--gold-1); }
+  .pcard ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 14px;
+    flex: 1;
+  }
+  .pcard li {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: color-mix(in oklab, var(--ink-fg) 78%, transparent);
+    padding-bottom: 14px;
+    border-bottom: 1px dashed color-mix(in oklab, var(--ink-fg) 10%, transparent);
+  }
+  .pcard li:last-child { border-bottom: 0; }
+  .pcard li strong {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-cream);
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .pcard.care li strong { color: var(--gold-1); }
+  .pcard .pfoot {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 50%, transparent);
+  }
+  .pcard.care .pfoot {
+    border-top-color: rgba(79, 184, 190, 0.25);
+    color: color-mix(in oklab, var(--ink-fg) 70%, transparent);
+  }
+  .pcard.care .pfoot strong { color: var(--gold-1); font-family: var(--font-mono); font-style: normal; font-size: 11px; letter-spacing: 0.14em; }
+
+  /* In practice strip */
+  .ethics-practice {
+    border-left: 3px solid var(--teal-bright, #4FB8BE);
+    padding: 24px 32px;
+    background: rgba(79, 184, 190, 0.06);
+    margin-bottom: 96px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .ethics-practice .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #4FB8BE;
+  }
+  .ethics-practice .body {
+    font-size: 16px;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--ink-fg) 85%, transparent);
+  }
+  .ethics-practice .body strong { color: var(--gold-cream); font-weight: 500; }
+
+  /* Data Integrity block */
+  .integrity {
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    padding-top: 80px;
+  }
+  .integrity-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 56px;
+    align-items: end;
+  }
+  .integrity-head h3 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--fg-on-dark);
+  }
+  .integrity-head h3 em { font-style: italic; color: var(--gold-cream); }
+  .integrity-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 20px;
+  }
+  .integrity-head .lede {
+    font-size: 17px;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--ink-fg) 72%, transparent);
+    max-width: 520px;
+  }
+
+  .integrity-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    border-left: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+  }
+  .integrity-step {
+    border-right: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    padding: 40px 36px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: background 220ms var(--ease-out);
+  }
+  .integrity-step:hover { background: color-mix(in oklab, var(--ink-fg) 3%, transparent); }
+  .integrity-step .num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--gold-cream);
+    padding-top: 4px;
+  }
+  .integrity-step h4 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--fg-on-dark);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .integrity-step h4 em { font-style: italic; color: var(--gold-cream); }
+  .integrity-step p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--ink-fg) 70%, transparent);
+  }
+
+  @media (max-width: 1100px) {
+    .ethics-head, .integrity-head { grid-template-columns: 1fr; gap: 32px; }
+    .principles-grid, .integrity-list { grid-template-columns: 1fr; }
+    .ethics-practice { grid-template-columns: 1fr; gap: 12px; }
+    .pcard li { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ═══ CLOSE / CTA ═══ */
+  .close-cta {
+    padding: 200px 0;
+    text-align: center;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+    position: relative;
+    overflow: hidden;
+  }
+  .close-cta::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(900px 600px at 50% 50%, var(--gold-glow-2), transparent 60%);
+  }
+  .close-cta-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+  .close-cta .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 32px;
+  }
+  .close-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 12vw, 200px);
+    font-weight: 200;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: var(--fg-on-dark);
+  }
+  .close-cta h2 em {
+    font-style: italic;
+    color: var(--gold-cream);
+    font-weight: 300;
+  }
+  .close-cta p {
+    margin: 40px auto 0;
+    max-width: 580px;
+    font-size: 19px;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--ink-fg) 75%, transparent);
+  }
+  .close-cta .actions {
+    margin-top: 56px;
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+
+  /* ─── YARN FORM ─── */
+  .yarn-form {
+    margin: 56px auto 0;
+    max-width: 720px;
+    text-align: left;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .yf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .yf-field {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .yf-field > span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+  }
+  .yf-field > span em {
+    font-style: italic;
+    color: color-mix(in oklab, var(--ink-fg) 45%, transparent);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+  .yf-field input,
+  .yf-field select,
+  .yf-field textarea {
+    background: color-mix(in oklab, var(--ink-fg) 4%, transparent);
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 16%, transparent);
+    color: var(--fg-on-dark);
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 14px 16px;
+    border-radius: 2px;
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+  }
+  .yf-field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+  .yf-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold-cream) 50%), linear-gradient(135deg, var(--gold-cream) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+  .yf-field input:focus,
+  .yf-field select:focus,
+  .yf-field textarea:focus {
+    border-color: var(--gold-1);
+    background: color-mix(in oklab, var(--ink-fg) 7%, transparent);
+  }
+  .yf-field input::placeholder,
+  .yf-field textarea::placeholder {
+    color: color-mix(in oklab, var(--ink-fg) 35%, transparent);
+  }
+
+  /* Honeypot — visually hidden, accessibility-hidden, but still in the DOM and focusable-bypass */
+  .yf-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .yarn-form .actions {
+    margin-top: 16px;
+    justify-content: flex-start;
+  }
+  .yarn-form button.btn-gold {
+    cursor: pointer;
+    font: inherit;
+    border: 0;
+  }
+
+  .yf-status {
+    min-height: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+  }
+  .yf-status.ok { color: #6FE0A0; }
+  .yf-status.err { color: #E08080; }
+
+  @media (max-width: 700px) {
+    .yf-row { grid-template-columns: 1fr; }
+    .yarn-form .actions { justify-content: stretch; flex-direction: column; }
+    .yarn-form .actions a, .yarn-form .actions button { text-align: center; justify-content: center; }
+  }
+
+  footer {
+    padding: 56px 48px 32px;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer .wm-svg {
+    height: 56px; width: auto; overflow: visible; display: block;
+  }
+  footer .wm-svg text {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 120px;
+    letter-spacing: -0.04em;
+    stroke-width: 2.2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke;
+  }
+  footer .wm-svg .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
+  footer .wm-svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
+  footer .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 50%, transparent);
+  }
+  footer .meta span + span::before { content: "·"; margin: 0 12px; color: var(--gold-1); }
+
+  @media (max-width: 1100px) {
+    .picker-controls { grid-template-columns: 1fr; }
+    .picker-col + .picker-col { border-left: 0; border-top: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent); }
+    .picker-result { grid-template-columns: 1fr; gap: 32px; }
+    .ways-grid { grid-template-columns: repeat(2, 1fr); }
+    .way { border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent); }
+    .way:nth-child(2) { border-right: 0; }
+    .how-steps { grid-template-columns: 1fr; gap: 64px; }
+    .how-steps::before { display: none; }
+    .case-inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .page { padding: 0 24px; }
+    .nav { padding: 16px 24px; }
+    .nav-meta { display: none; }
+    .word-mark { margin: 32px 0; }
+    .word-mark text { font-size: 180px; }
+    .hero-bottom { grid-template-columns: 1fr; }
+    .ways-head { grid-template-columns: 1fr; gap: 24px; }
+    .ways-grid { grid-template-columns: 1fr; }
+    .way { border-right: 0; }
+    .belief { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo" aria-label="WE AI — home">
+    <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text class="we draw" x="0" y="104">WE</text>
+      <text class="ai draw" x="206" y="104">AI</text>
+    </svg>
+  </a>
+  <div class="nav-meta">
+    <span>AOTEAROA · NZ</span>
+    <span>EST. 2026</span>
+    <span>SENIOR-LED</span>
+  </div>
+  <div class="nav-right">
+    <button id="theme-toggle" class="nav-theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <a href="#contact" class="nav-cta">Let's have a chat →</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ═══ HERO — wireframe letter mark ═══ -->
+  <section class="hero" data-screen-label="01 Hero">
+    <div class="hero-top">
+      <div>WE AI</div>
+      <div class="center">PRACTICAL AI</div>
+      <div class="right">FOR NEW ZEALAND BUSINESSES</div>
+    </div>
+
+    <div class="word-mark">
+      <svg viewBox="0 0 1300 420" xmlns="http://www.w3.org/2000/svg">
+        <text class="we" x="0" y="340">WE</text>
+        <text class="ai" x="700" y="340">AI</text>
+      </svg>
+    </div>
+
+    <div class="hero-tag">A boutique consultancy building <em>working AI</em> for New Zealand's owner-operators, GMs and founders — not strategy decks.</div>
+
+    <div class="hero-bottom">
+      <p class="hero-lead">Most owners can <em>tell</em> there's something to AI. Few can tell what <em>their</em> Tuesday looks like with it. We close that gap — with senior practitioners, fixed fees, and a working tool in your team's hands inside six weeks.</p>
+      <div class="hero-actions">
+        <a class="btn-gold" href="#picker">Show me what AI could do <span>→</span></a>
+        <a class="btn-out" href="#contact">Book a yarn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MANIFESTO — kept from V1 ═══ -->
+  <section class="manifesto" data-screen-label="02 Manifesto">
+    <div class="manifesto-inner">
+      <div class="kicker">A short manifesto</div>
+      <p>We believe AI should land in your business as a <em>working tool</em> — something your team uses on Monday, not a forty-page deck filed by Friday.</p>
+      <p>We believe in <em>senior people</em>, fixed fees, and earning the next engagement by making the last one pay for itself.</p>
+      <p>We believe NZ business doesn't need more AI <em>strategy.</em> It needs AI that ships, that gets used, and that quietly takes work off the people you can't afford to burn out.</p>
+      <div class="signoff">
+        <div class="sig">— <em>WE AI</em></div>
+        <div>AOTEAROA · 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE PICKER — what would AI do for…  ═══ -->
+  <section class="picker-section" id="picker" data-screen-label="03 Picker">
+    <div class="page" style="padding: 0;">
+      <div class="picker-head">
+        <div class="kicker">An interactive field guide</div>
+        <h2>What would AI<br>do for <em>you?</em></h2>
+        <p class="deck">Most owners can't picture it. So we sketched it. Pick your role, pick a function, see one concrete thing AI could quietly take off your plate this quarter.</p>
+      </div>
+
+      <div class="picker">
+        <div class="picker-controls">
+          <div class="picker-col">
+            <div class="label"><span class="num">1</span>I am a…</div>
+            <div class="chips" id="role-chips">
+              <button class="chip active" data-role="owner">Owner-Operator</button>
+              <button class="chip" data-role="gm">General Manager</button>
+              <button class="chip" data-role="ops">Ops Lead</button>
+              <button class="chip" data-role="founder">Founder</button>
+              <button class="chip" data-role="office">Office Manager</button>
+            </div>
+          </div>
+          <div class="picker-col">
+            <div class="label"><span class="num">2</span>I want help with…</div>
+            <div class="chips" id="func-chips">
+              <button class="chip active" data-func="sales">Sales &amp; quoting</button>
+              <button class="chip" data-func="finance">Finance &amp; reporting</button>
+              <button class="chip" data-func="ops">Operations</button>
+              <button class="chip" data-func="hr">HR &amp; hiring</button>
+              <button class="chip" data-func="marketing">Marketing</button>
+              <button class="chip" data-func="service">Customer service</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="picker-result" id="picker-result">
+          <!-- filled by JS -->
+        </div>
+
+        <div class="picker-foot">
+          <div class="left"><span class="dot"></span><span>Live example · scenarios drawn from real engagements</span></div>
+          <div>30 combinations · scroll the chips</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW WE WORK — 1-2-3 (kept from V1) ═══ -->
+  <section class="how" data-screen-label="04 How">
+    <div class="how-inner">
+      <div class="how-head">
+        <div class="kicker">How we work · 1 · 2 · 3</div>
+        <h2>Three steps. <em>Six weeks.</em><br>One working tool.</h2>
+      </div>
+      <div class="how-steps">
+        <div class="step">
+          <div class="circle">i.</div>
+          <h3>We <em>listen.</em></h3>
+          <p>A working session with your operators. We map the processes eating your team's time and rank by impact and effort. Plain English, no decks.</p>
+          <div class="meta">Week 1 — Discover</div>
+        </div>
+        <div class="step">
+          <div class="circle">ii.</div>
+          <h3>We <em>build.</em></h3>
+          <p>One process, one team, one outcome. Senior practitioners build the working tool. Your team trials it on real work, in real time.</p>
+          <div class="meta">Weeks 2–5 — Build</div>
+        </div>
+        <div class="step">
+          <div class="circle">iii.</div>
+          <h3>We <em>handover.</em></h3>
+          <p>Your team owns it. We document the system, train the people, and stay on-call for thirty days. You decide what comes next.</p>
+          <div class="meta">Week 6 — Embed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOUR WAYS TO START (kept from V2) ═══ -->
+  <section class="ways" data-screen-label="05 Ways">
+    <div class="ways-head">
+      <div>
+        <div class="kicker">Engagements · 04</div>
+        <h2>Four ways<br>to <em>start.</em></h2>
+      </div>
+      <p>Each engagement is scoped, fixed-price, and delivered by senior practitioners. Most owners begin with a Readiness Check and grow from there. Nothing is locked in — every step earns the next.</p>
+    </div>
+
+    <div class="ways-grid">
+      <div class="way">
+        <div class="num">001 — DIAGNOSTIC</div>
+        <h3>Readiness <em>Check</em></h3>
+        <p>A focused two-week diagnostic. Your top AI opportunities, ranked by impact and ease, in a plain-English plan you can act on Monday.</p>
+        <div class="meta">2 wks · NZD 5K</div>
+      </div>
+      <div class="way">
+        <div class="num">002 — DELIVERY</div>
+        <h3>Automation <em>Sprint</em></h3>
+        <p>We pick a process eating your team's time and build the AI that handles it. Trained team, working tool, 30-day support included.</p>
+        <div class="meta">4–10 wks · 25–80K</div>
+      </div>
+      <div class="way">
+        <div class="num">003 — LEADERSHIP</div>
+        <h3>Leadership <em>Briefing</em></h3>
+        <p>A half-day with your senior team. Cut through the hype. Understand what's real, what matters in your industry, what to do next.</p>
+        <div class="meta">Half day · NZD 4K</div>
+      </div>
+      <div class="way">
+        <div class="num">004 — EMBEDDED</div>
+        <h3>Growth <em>Partnership</em></h3>
+        <p>An embedded AI partner on monthly retainer. One scoped project per month, on-call advisory, quarterly roadmap reviews.</p>
+        <div class="meta">Monthly · 8K+/mo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CASE — three days to three minutes (kept from V2) ═══ -->
+  <section class="case" data-screen-label="06 Case">
+    <div class="case-inner">
+      <div>
+        <div class="case-eyebrow">A recent engagement</div>
+        <h2>From three-day reports<br>to <em>three minutes.</em></h2>
+        <p class="body">A 40-person services firm in Wellington was burning a full day a week on manual board reporting. We built an AI pipeline that pulls from their CRM, accounting and project tools and writes the weekly board pack — finished in five and a bit weeks.</p>
+        <div class="case-stats">
+          <div>
+            <div class="v">8<em>hrs</em></div>
+            <div class="l">Saved per week, every week</div>
+          </div>
+          <div>
+            <div class="v">5<em>wks</em></div>
+            <div class="l">Kickoff to live system</div>
+          </div>
+          <div>
+            <div class="v">$48<em>K</em></div>
+            <div class="l">Annual cost recovered</div>
+          </div>
+          <div>
+            <div class="v">1<em>mo</em></div>
+            <div class="l">To pay for itself</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-visual">
+        <div class="pill">⏱ Live in 5 weeks</div>
+        <svg viewBox="0 0 480 600" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="cg1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#003E47"/>
+              <stop offset="0.6" stop-color="#00A3A3"/>
+              <stop offset="1" stop-color="#DAA520"/>
+            </linearGradient>
+          </defs>
+          <path d="M 60 100 C 200 200, 100 320, 280 360 S 480 480, 420 560" fill="none" stroke="url(#cg1)" stroke-width="2" opacity="0.9"/>
+          <path d="M 80 80 C 220 180, 120 300, 300 340 S 480 460, 440 540" fill="none" stroke="url(#cg1)" stroke-width="3"/>
+          <path d="M 100 60 C 240 160, 140 280, 320 320 S 480 440, 460 520" fill="none" stroke="url(#cg1)" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <div class="quote">
+          <div class="qm">"</div>
+          <div class="qt">It feels like we hired a great analyst — except this analyst never gets sick of doing the same thing on a Friday.</div>
+          <div class="qa">General Manager · Wellington</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THINGS WE BELIEVE (kept from V2) ═══ -->
+  <section class="believe" data-screen-label="07 Believe">
+    <div class="believe-head">
+      <div class="kicker">Principles · how we work</div>
+      <h2>Six things we<br>believe, <em>quietly.</em></h2>
+    </div>
+    <div class="believe-list">
+      <div class="belief">
+        <div class="num">/01</div>
+        <h3>Senior people, <em>every time.</em></h3>
+        <p>The person who pitches you is the person who builds. We don't scale by adding juniors; we scale by being more useful, faster.</p>
+      </div>
+      <div class="belief">
+        <div class="num">/02</div>
+        <h3>Working tools beat <em>strategy decks.</em></h3>
+        <p>Anyone can write a forty-page report. We build something your team uses Monday — and measure what changed by Friday.</p>
+      </div>
+      <div class="belief">
+        <div class="num">/03</div>
+        <h3>Fixed fees. <em>Always.</em></h3>
+        <p>You should know what you're getting and what it costs before you start. No T&amp;M. No scope creep theatre.</p>
+      </div>
+      <div class="belief">
+        <div class="num">/04</div>
+        <h3>Built for <em>NZ business.</em></h3>
+        <p>NZ compliance, NZ suppliers, NZ customers, NZ working hours. Nothing offshored. Nothing handed off.</p>
+      </div>
+      <div class="belief">
+        <div class="num">/05</div>
+        <h3>Plain English, <em>not tech-speak.</em></h3>
+        <p>If your accountant can't follow what we built and why, we did it wrong. Outcomes, not jargon.</p>
+      </div>
+      <div class="belief">
+        <div class="num">/06</div>
+        <h3>Earn the <em>next engagement.</em></h3>
+        <p>No retainers you can't cancel. We earn the next sprint by making the last one pay for itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ETHICS / AOTEAROA ═══ -->
+  <section class="ethics" id="ethics" data-screen-label="08 Ethics">
+    <div class="ethics-inner">
+      <div class="ethics-head">
+        <div>
+          <div class="kicker">Built for Aotearoa</div>
+          <h2>Responsible AI<br>is the <em>floor.</em></h2>
+        </div>
+        <p class="lede">Doing AI properly means more than ticking a privacy box. It means <em>good data hygiene,</em> a clear chain of custody, and a person — always a person — accountable for what the system does next.</p>
+      </div>
+
+      <div class="ethics-banner">
+        <h3>AI is an <em>accelerant,</em> not the strategy.</h3>
+        <p>We use AI to reduce manual effort, sharpen decisions and support frontline staff — with human oversight on every output. The model proposes; a person disposes. Always.</p>
+      </div>
+
+      <div class="principles-grid">
+        <div class="pcard fair">
+          <div class="ptag">Global standard</div>
+          <h4>FAIR <em>data</em><br>principles.</h4>
+          <ul>
+            <li><strong>Findable</strong>Technical discoverability — metadata, identifiers, indexes.</li>
+            <li><strong>Accessible</strong>Technically retrievable under defined permissions.</li>
+            <li><strong>Interoperable</strong>System integration — shared schemas and formats.</li>
+            <li><strong>Reusable</strong>Documented for downstream use across teams and time.</li>
+          </ul>
+          <div class="pfoot">The baseline — how the data behaves at the technical layer.</div>
+        </div>
+
+        <div class="pcard care">
+          <div class="ptag">Our operating standard</div>
+          <h4>How we <em>handle</em><br>your data.</h4>
+          <ul>
+            <li><strong>Consent</strong>Clear scope of use — documented before anything connects to a model.</li>
+            <li><strong>Authority</strong>You decide what stays in, what goes out, and what gets retrained on.</li>
+            <li><strong>Responsibility</strong>A named owner on our side for every dataset we touch.</li>
+            <li><strong>Ethics</strong>If we wouldn’t want it done with our data, we don’t do it with yours.</li>
+          </ul>
+          <div class="pfoot"><strong>Standard practice</strong> — not an “add-on.”</div>
+        </div>
+      </div>
+
+      <div class="ethics-practice">
+        <div class="label">In practice</div>
+        <div class="body"><strong>Documented data flows, the ability to pause or withdraw data, ongoing governance, and a single human owner on every system.</strong> FAIR principles handle the plumbing; our operating standard handles the judgement.</div>
+      </div>
+
+      <!-- DATA INTEGRITY -->
+      <div class="integrity">
+        <div class="integrity-head">
+          <div>
+            <div class="kicker">Data integrity · the practical part</div>
+            <h3>Garbage in,<br><em>garbage</em> at scale.</h3>
+          </div>
+          <p class="lede">AI doesn't just inherit your data quality — it amplifies it. A messy spreadsheet becomes a confidently-wrong assistant. Here's how we keep that from happening.</p>
+        </div>
+
+        <div class="integrity-list">
+          <div class="integrity-step">
+            <div class="num">/01</div>
+            <div>
+              <h4>Source of truth, <em>named.</em></h4>
+              <p>Before we connect anything to a model, we agree which system is authoritative for which fact. The CRM owns the customer; Xero owns the invoice. AI reads from the source — never from a copy of a copy.</p>
+            </div>
+          </div>
+          <div class="integrity-step">
+            <div class="num">/02</div>
+            <div>
+              <h4>Provenance on <em>every output.</em></h4>
+              <p>Every AI-drafted answer carries its sources. If the model says “your Q3 revenue was $1.4M,” you can click through to the rows it pulled. No source, no answer.</p>
+            </div>
+          </div>
+          <div class="integrity-step">
+            <div class="num">/03</div>
+            <div>
+              <h4>Human in the <em>send loop.</em></h4>
+              <p>For anything that leaves your business — a quote, an email, an invoice — a person reviews and signs off. The AI prepares; the human ships. We design the workflow that way on purpose.</p>
+            </div>
+          </div>
+          <div class="integrity-step">
+            <div class="num">/04</div>
+            <div>
+              <h4>Drift detection, <em>built in.</em></h4>
+              <p>Models go stale. Data shifts. We instrument every assistant with quality checks — confidence scores, escalation rules, weekly drift reports — so you find out from us, not from a customer.</p>
+            </div>
+          </div>
+          <div class="integrity-step">
+            <div class="num">/05</div>
+            <div>
+              <h4>Hosted in <em>NZ jurisdiction.</em></h4>
+              <p>Your data stays under NZ law. We default to providers with Australia/NZ regions and explicit no-training contracts — your business doesn’t become someone else’s training data.</p>
+            </div>
+          </div>
+          <div class="integrity-step">
+            <div class="num">/06</div>
+            <div>
+              <h4>An <em>off-switch</em> that works.</h4>
+              <p>Every system we build can be paused or rolled back in a single command. If it goes sideways at 4pm on a Friday, we can stop it before close of business — not next Tuesday after a vendor ticket.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CLOSE / CTA ═══ -->
+  <section class="close-cta" id="contact" data-screen-label="09 CTA">
+    <div class="close-cta-inner">
+      <div class="kicker">Ready when you are</div>
+      <h2>Let's have<br>a <em>yarn.</em></h2>
+      <p>Thirty minutes. No commitment, no slide deck. We'll tell you honestly if we can help — and where AI would make the biggest difference in your business right now.</p>
+
+      <form class="yarn-form" id="yarn-form" novalidate>
+        <div class="yf-row">
+          <label class="yf-field">
+            <span>Your name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Sam Ngata">
+          </label>
+          <label class="yf-field">
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="sam@yourbusiness.co.nz">
+          </label>
+        </div>
+        <div class="yf-row">
+          <label class="yf-field">
+            <span>Company</span>
+            <input type="text" name="company" autocomplete="organization" placeholder="Optional">
+          </label>
+          <label class="yf-field">
+            <span>Best way to reach you</span>
+            <select name="contact_pref">
+              <option value="email">Email is fine</option>
+              <option value="phone">Give me a ring</option>
+              <option value="either">Either works</option>
+            </select>
+          </label>
+        </div>
+        <label class="yf-field full">
+          <span>What's on your mind? <em>(optional)</em></span>
+          <textarea name="message" rows="3" placeholder="A line or two on what's bugging you, or leave it blank — we'll figure it out on the call."></textarea>
+        </label>
+
+        <!-- Honeypot — hidden from humans, irresistible to bots -->
+        <div class="yf-honeypot" aria-hidden="true">
+          <label>
+            Don't fill this in if you're human:
+            <input type="checkbox" name="website_url_confirm" tabindex="-1" autocomplete="off">
+          </label>
+          <label>
+            Leave this empty:
+            <input type="text" name="company_website" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+        <!-- Time-trap: bots fire instantly; we record load time and reject submissions under ~3s -->
+        <input type="hidden" name="loaded_at" value="">
+
+        <div class="actions">
+          <button class="btn-gold" type="submit">Book a 30-min yarn <span>→</span></button>
+          <a class="btn-out" href="mailto:hello@weai.co.nz">Or email hello@weai.co.nz</a>
+        </div>
+        <div class="yf-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <svg class="wm-svg" viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-label="WE AI">
+    <text class="we" x="0" y="104">WE</text>
+    <text class="ai" x="206" y="104">AI</text>
+  </svg>
+  <div class="meta">
+    <span>© 2026 WE AI Limited</span>
+    <span>Aotearoa New Zealand</span>
+    <span>AI that works</span>
+  </div>
+</footer>
+
+<script>
+// ═══════════ SCENARIO LIBRARY ═══════════
+// 5 roles × 6 functions = 30 plain-English sketches.
+// Each scenario: title, body, tools, stats (saved, weeks, cost, payback)
+const SCENARIOS = {
+  owner: {
+    sales:    { title: "Quote in <em>twenty minutes,</em> not two days.",
+                body: "When an enquiry lands at 9pm, you're tempted to leave it till morning — and that's how you lose it. We build an AI quoting assistant trained on your past jobs, your margins and your standard inclusions. It drafts a quote ready for your sign-off in twenty minutes flat. You stay in control of the number; AI handles the typing.",
+                tools: ["Your CRM", "Past quotes", "Pricing rules"], saved: "12hrs/wk", weeks: "5 wks", cost: "$28K", payback: "2 mo" },
+    finance:  { title: "End-of-month, <em>without the headache.</em>",
+                body: "Most owner-operators are still doing month-end on a Sunday. We build a reconciliation assistant that pulls from Xero, your bank feeds and your invoicing tools, flags anomalies, and drafts your monthly summary the way you actually write it. You review, sign-off, send.",
+                tools: ["Xero", "Bank feeds", "Invoicing"], saved: "8hrs/wk", weeks: "4 wks", cost: "$22K", payback: "3 mo" },
+    ops:      { title: "A <em>second pair of hands</em> on every job.",
+                body: "Job notes, site photos, supplier comms, schedule changes — most owners hold this in their head. We build an ops assistant that captures voice notes from site, files them against the right job, drafts daily updates for clients, and flags anything that's slipping. Your foreman gets a quiet co-pilot, not another app to fight.",
+                tools: ["Voice notes", "Job files", "Supplier email"], saved: "10hrs/wk", weeks: "6 wks", cost: "$38K", payback: "3 mo" },
+    hr:       { title: "Hire faster <em>without screening at midnight.</em>",
+                body: "We build an AI screener that reads CVs against the job you actually need filled (not the one you wrote three years ago), drafts a one-page summary per candidate, and prepares your shortlist with five questions tailored to each one. You stay the decision-maker; AI takes the slog.",
+                tools: ["Job ads", "CV inbox", "Screening rubric"], saved: "6hrs/role", weeks: "4 wks", cost: "$18K", payback: "1 hire" },
+    marketing:{ title: "Marketing that <em>actually goes out.</em>",
+                body: "Most owners haven't posted in six weeks. We build a content engine trained on your voice, your jobs, and your customers. It drafts the post, suggests the photo from your job folder, and queues it for your sign-off. You approve in two minutes from your phone. Marketing happens.",
+                tools: ["Photo library", "Past posts", "LinkedIn"], saved: "5hrs/wk", weeks: "4 wks", cost: "$16K", payback: "2 mo" },
+    service:  { title: "Every customer email <em>answered same-day.</em>",
+                body: "We build a service assistant that drafts replies to common customer emails in your tone — quote follow-ups, scheduling, invoice queries — ready for you to send with one click. The tricky ones still come to you. The other 70% are handled before lunch.",
+                tools: ["Email", "Knowledge base", "FAQs"], saved: "8hrs/wk", weeks: "5 wks", cost: "$24K", payback: "2 mo" }
+  },
+  gm: {
+    sales:    { title: "A pipeline you can <em>actually trust.</em>",
+                body: "Reps update CRM when they remember. We build an AI that listens to your sales calls (with consent), writes the CRM update for them, scores deal health, and surfaces the three deals most likely to slip this week. Your Monday meeting goes from forty minutes of guessing to ten minutes of action.",
+                tools: ["Call recordings", "CRM", "Email"], saved: "4hrs/rep/wk", weeks: "6 wks", cost: "$45K", payback: "1 quarter" },
+    finance:  { title: "From three-day reports to <em>three minutes.</em>",
+                body: "Your monthly board pack takes a week of someone's life. We build a reporting pipeline that pulls from your CRM, accounting and project systems, writes the commentary in your house style, and produces the deck. You review and edit. The five days become an afternoon.",
+                tools: ["CRM", "Xero/MYOB", "Project tools"], saved: "8hrs/wk", weeks: "5 wks", cost: "$48K", payback: "1 mo" },
+    ops:      { title: "An <em>early-warning system</em> for your operations.",
+                body: "Late projects, supplier delays, capacity crunches — you usually find out when it's too late. We build a daily ops digest that pulls signals from your project, scheduling and finance tools, flags the things drifting, and drafts the message you'd send to your team. You approve, send, sleep.",
+                tools: ["Project mgmt", "Finance", "Schedules"], saved: "6hrs/wk", weeks: "6 wks", cost: "$42K", payback: "2 mo" },
+    hr:       { title: "A people <em>dashboard</em> that actually means something.",
+                body: "Engagement scores nobody trusts, exit interviews nobody reads. We build a quiet listening tool that summarises themes from one-on-one notes, surveys and Slack (with consent), flags managers whose teams are drifting, and writes a one-page monthly read. Useful, finally.",
+                tools: ["1:1 notes", "Surveys", "HRIS"], saved: "10hrs/mo", weeks: "5 wks", cost: "$32K", payback: "3 mo" },
+    marketing:{ title: "Stop <em>guessing</em> what's working.",
+                body: "We build an attribution layer across your campaigns, content and pipeline that tells you which posts, channels and offers actually moved deals — not vanity metrics. Your weekly marketing review goes from 'how do we feel?' to 'here's what to double down on.'",
+                tools: ["Ad platforms", "CRM", "Web analytics"], saved: "5hrs/wk", weeks: "6 wks", cost: "$36K", payback: "2 mo" },
+    service:  { title: "Customer signal, <em>without the noise.</em>",
+                body: "Tickets, calls, NPS comments, reviews — buried gold. We build a synthesis layer that surfaces the top three issues this week with example quotes, the customers most at-risk, and the wins worth amplifying. Your service stand-up gets ten minutes of substance instead of an hour of stories.",
+                tools: ["Ticketing", "NPS", "Reviews"], saved: "6hrs/wk", weeks: "5 wks", cost: "$34K", payback: "2 mo" }
+  },
+  ops: {
+    sales:    { title: "Handovers that <em>actually hand over.</em>",
+                body: "Sales says 'sold'. Ops gets a half-finished spreadsheet and three questions a week later. We build an AI that listens to the closing call, drafts the full ops handover (scope, dates, owner, risks) and pre-fills your project setup. Your delivery starts with everything it needs.",
+                tools: ["Call recordings", "CRM", "Project mgmt"], saved: "4hrs/job", weeks: "5 wks", cost: "$28K", payback: "10 jobs" },
+    finance:  { title: "Capacity vs cost, <em>weekly.</em>",
+                body: "We build a Friday digest that pulls hours, jobs and budgets across your team and tells you which projects are ahead, behind, or burning hot — before they bleed margin. You walk into Monday's resourcing meeting with answers, not a spreadsheet.",
+                tools: ["Time tracking", "Finance", "Project mgmt"], saved: "5hrs/wk", weeks: "5 wks", cost: "$26K", payback: "2 mo" },
+    ops:      { title: "A <em>brain</em> for your standing operating procedures.",
+                body: "Your SOPs live in a 60-page Notion. Nobody reads them. We build an ops assistant your team can ask in plain English — 'what's the process for X?' — that answers from your real docs, your Slack history, and your senior people's actual past answers. Knowledge stops walking out the door.",
+                tools: ["Notion/Docs", "Slack", "SOPs"], saved: "30min/q", weeks: "5 wks", cost: "$32K", payback: "3 mo" },
+    hr:       { title: "Onboarding that <em>doesn't burn a senior week one.</em>",
+                body: "We build a buddy assistant for new starters — answers their basic questions, walks them through the tools, schedules their first-week intros, and flags to you the things only a human should answer. Your seniors get their week back.",
+                tools: ["Docs", "Slack", "Calendar"], saved: "6hrs/hire", weeks: "5 wks", cost: "$24K", payback: "5 hires" },
+    marketing:{ title: "Marketing requests, <em>triaged.</em>",
+                body: "Sales wants a one-pager. Account wants a webinar. Marketing is one person. We build a request triage that drafts the thing or the brief, routes by priority, and tracks turnaround so the team can actually plan. Less chaos, more output.",
+                tools: ["Slack", "Brief templates", "Asset library"], saved: "5hrs/wk", weeks: "4 wks", cost: "$22K", payback: "2 mo" },
+    service:  { title: "Your service team, <em>amplified.</em>",
+                body: "We build a tier-1 reply assistant that drafts answers to common tickets in your tone, with the right links, ready for your team to send. They handle 2× the volume without skipping the human judgement on the tricky stuff.",
+                tools: ["Helpdesk", "KB", "Past tickets"], saved: "10hrs/agent/wk", weeks: "5 wks", cost: "$32K", payback: "1 mo" }
+  },
+  founder: {
+    sales:    { title: "Turn every call into <em>three follow-ups.</em>",
+                body: "Founders run on calls. We build a post-call assistant that drafts the recap email, the next-step proposal, the CRM update, and the LinkedIn invite — ready for your one-tap sign-off. You finish a call and the work's already done.",
+                tools: ["Call recordings", "Email", "LinkedIn"], saved: "5hrs/wk", weeks: "4 wks", cost: "$22K", payback: "2 mo" },
+    finance:  { title: "Investor-ready <em>any Tuesday.</em>",
+                body: "We build a metrics dashboard pulled live from Stripe, Xero and your product — with the commentary draft your investors actually want to read. Quarterly updates go from a week of pain to a Tuesday afternoon.",
+                tools: ["Stripe", "Xero", "Product analytics"], saved: "20hrs/q", weeks: "6 wks", cost: "$36K", payback: "1 quarter" },
+    ops:      { title: "A <em>chief of staff</em> in your inbox.",
+                body: "We build a personal ops assistant that triages your inbox by who you actually need to talk to today, drafts the routine replies, and surfaces the three decisions that needed you yesterday. Founder time, defended.",
+                tools: ["Email", "Calendar", "Notes"], saved: "8hrs/wk", weeks: "5 wks", cost: "$30K", payback: "2 mo" },
+    hr:       { title: "Hire your first ten <em>without losing the plot.</em>",
+                body: "We build a hiring system tailored to your stage — from JD drafting to scheduling, scorecards to references — so you can run a real process without becoming a recruiter. Founders we've worked with cut time-to-offer by half.",
+                tools: ["Job board", "Scheduling", "Scorecards"], saved: "10hrs/role", weeks: "5 wks", cost: "$28K", payback: "2 hires" },
+    marketing:{ title: "Founder voice, <em>at scale.</em>",
+                body: "We build a content engine trained on how you actually write, what you actually believe, and what your customers actually search for. Drafts in your voice, ready for a two-minute edit. You stop being the bottleneck on your own brand.",
+                tools: ["Past writing", "LinkedIn", "Newsletter"], saved: "6hrs/wk", weeks: "5 wks", cost: "$26K", payback: "3 mo" },
+    service:  { title: "Customer love, <em>without you in every thread.</em>",
+                body: "Early customers want to talk to the founder. They also want fast answers. We build a draft-reply system that answers in your voice, handles the routine, and routes the genuinely-needs-you to you. Customers feel heard. You sleep.",
+                tools: ["Email", "Help docs", "Past replies"], saved: "5hrs/wk", weeks: "4 wks", cost: "$22K", payback: "2 mo" }
+  },
+  office: {
+    sales:    { title: "Quotes <em>out the door</em> while reps are on the road.",
+                body: "Reps phone in the details, you build the quote. We replace the spreadsheet with an assistant that drafts the quote from a five-line phone note, formats it in your template, and sends it for the rep to review. Fewer late nights.",
+                tools: ["Phone notes", "Quote templates", "CRM"], saved: "5hrs/wk", weeks: "4 wks", cost: "$18K", payback: "2 mo" },
+    finance:  { title: "Receipts and reconciliation, <em>handled.</em>",
+                body: "Photo a receipt, drop an invoice, forward an email — AI codes it, files it against the right project, and queues it for your monthly Xero export. The shoebox stops being a shoebox.",
+                tools: ["Xero", "Email inbox", "Receipts"], saved: "6hrs/wk", weeks: "4 wks", cost: "$16K", payback: "2 mo" },
+    ops:      { title: "The <em>institutional memory</em> of your office, on tap.",
+                body: "Where's the cert? Who's the supplier? What did we do last time? We build a search layer across your shared drive, email and notes that answers in plain English, in five seconds. Nobody asks 'where's that file' again.",
+                tools: ["Drive/SharePoint", "Email", "Notes"], saved: "30min/q", weeks: "5 wks", cost: "$22K", payback: "3 mo" },
+    hr:       { title: "Onboarding paperwork, <em>not paperwork.</em>",
+                body: "Welcome emails, kit checklists, payroll forms, system access — the same loop, every hire. We build it as a guided flow. You start a hire; the whole onboarding teed up by Tuesday. New starters notice.",
+                tools: ["Email", "Forms", "HRIS"], saved: "4hrs/hire", weeks: "4 wks", cost: "$18K", payback: "5 hires" },
+    marketing:{ title: "Newsletter and updates <em>that go out on time.</em>",
+                body: "We build a draft engine for your monthly newsletter, your client updates, and your social posts — pulled from what's actually happened in the business. You edit and approve. Communications stop being the thing you keep meaning to do.",
+                tools: ["Past comms", "Calendar", "Project notes"], saved: "4hrs/mo", weeks: "4 wks", cost: "$16K", payback: "3 mo" },
+    service:  { title: "First-line replies, <em>before lunch.</em>",
+                body: "We build a draft-reply system trained on your past correspondence and FAQs that handles the routine — bookings, queries, follow-ups — in your tone, ready for one-click send. Your inbox gets short again.",
+                tools: ["Email", "FAQs", "Booking system"], saved: "6hrs/wk", weeks: "4 wks", cost: "$18K", payback: "2 mo" }
+  }
+};
+
+// ═══════════ PICKER LOGIC ═══════════
+let role = 'owner', func = 'sales';
+const result = document.getElementById('picker-result');
+
+function render() {
+  const s = SCENARIOS[role][func];
+  result.classList.add('fading');
+  setTimeout(() => {
+    result.innerHTML = `
+      <div class="pr-left">
+        <div class="pr-eyebrow">For a ${roleLabel(role)} · ${funcLabel(func)}</div>
+        <div class="pr-title">${s.title}</div>
+        <div class="pr-body">${s.body}</div>
+        <div class="pr-tools">
+          ${s.tools.map(t => `<span class="tool">${t}</span>`).join('')}
+        </div>
+      </div>
+      <div class="pr-right">
+        <div class="pr-stats">
+          <div class="pr-stat"><div class="v">${s.saved}</div><div class="l">Time saved</div></div>
+          <div class="pr-stat"><div class="v">${s.weeks}</div><div class="l">To live</div></div>
+          <div class="pr-stat"><div class="v">${s.cost}</div><div class="l">Indicative fee</div></div>
+          <div class="pr-stat"><div class="v">${s.payback}</div><div class="l">Pays for itself</div></div>
+        </div>
+        <div class="pr-cta">
+          <a href="#contact">Talk through this <span>→</span></a>
+          <span class="badge">Sketch · indicative</span>
+        </div>
+      </div>
+    `;
+    result.classList.remove('fading');
+  }, 200);
+}
+
+function roleLabel(r) {
+  return { owner: 'Owner-Operator', gm: 'General Manager', ops: 'Ops Lead', founder: 'Founder', office: 'Office Manager' }[r];
+}
+function funcLabel(f) {
+  return { sales: 'Sales & quoting', finance: 'Finance & reporting', ops: 'Operations', hr: 'HR & hiring', marketing: 'Marketing', service: 'Customer service' }[f];
+}
+
+document.querySelectorAll('#role-chips .chip').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#role-chips .chip').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    role = b.dataset.role;
+    render();
+  });
+});
+document.querySelectorAll('#func-chips .chip').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#func-chips .chip').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    func = b.dataset.func;
+    render();
+  });
+});
+
+render();
+
+// ═══════════ YARN FORM ═══════════
+(function initYarnForm() {
+  const form = document.getElementById('yarn-form');
+  if (!form) return;
+
+  // Stamp load time for the time-trap
+  const loadedAt = form.querySelector('input[name="loaded_at"]');
+  const startTime = Date.now();
+  if (loadedAt) loadedAt.value = String(startTime);
+
+  const status = form.querySelector('.yf-status');
+  const submit = form.querySelector('button[type="submit"]');
+
+  function setStatus(msg, kind) {
+    status.textContent = msg;
+    status.className = 'yf-status ' + (kind || '');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setStatus('', '');
+
+    const fd = new FormData(form);
+
+    // ── Bot guards ──────────────────────────────────────
+    // 1. Honeypot: any value in either honeypot field = bot
+    const hp1 = fd.get('website_url_confirm');
+    const hp2 = fd.get('company_website');
+    if (hp1 || (hp2 && String(hp2).trim() !== '')) {
+      // Pretend success — don't tip the bot off
+      setStatus('Thanks — we\'ll be in touch.', 'ok');
+      form.reset();
+      return;
+    }
+    // 2. Time trap: humans take >3s to fill a form
+    const elapsed = Date.now() - startTime;
+    if (elapsed < 3000) {
+      setStatus('Thanks — we\'ll be in touch.', 'ok');
+      form.reset();
+      return;
+    }
+
+    // ── Real validation ─────────────────────────────────
+    const name = String(fd.get('name') || '').trim();
+    const email = String(fd.get('email') || '').trim();
+    if (!name) { setStatus('Please add your name.', 'err'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus('Please add a valid email.', 'err'); return;
+    }
+
+    submit.disabled = true;
+    setStatus('Sending…', '');
+
+    // ── Submit ──────────────────────────────────────────
+    // No backend wired yet — fall back to opening a pre-filled mail draft so the
+    // form is functional today. Replace this block with a fetch() to your endpoint
+    // (e.g. Formspree, Netlify forms, /api/contact) when backend is ready.
+    try {
+      const subject = encodeURIComponent(`New yarn request — ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Company: ${fd.get('company') || '—'}\n` +
+        `Best contact: ${fd.get('contact_pref') || 'email'}\n\n` +
+        `Message:\n${fd.get('message') || '—'}\n`
+      );
+      window.location.href = `mailto:hello@weai.co.nz?subject=${subject}&body=${body}`;
+      setStatus('Opening your email — send to confirm.', 'ok');
+    } catch (err) {
+      setStatus('Something went wrong. Email hello@weai.co.nz instead.', 'err');
+    } finally {
+      submit.disabled = false;
+    }
+  });
+})();
+
+// ═══════════ THEME TOGGLE ═══════════
+// Default is teal (set in the pre-paint script in <head>).
+// Clicking the nav button flips between dark and teal and persists the choice.
+(function initThemeToggle() {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+
+  btn.addEventListener('click', function () {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var next = current === 'dark' ? 'teal' : 'dark';
+    if (next === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('weai-theme', next); } catch (e) {}
+    btn.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  });
+})();
+</script>
+
+</body>
+</html>

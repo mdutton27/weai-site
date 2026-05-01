@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-NZ" data-theme="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#003E47">
+<meta name="robots" content="noindex">
+<title>Not found — WE AI</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon-weai.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  :root {
+    --night: #003E47;
+    --ink-fg: #F4EFDF;
+  }
+  * {
+    font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+    font-variant-ligatures: none;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--night);
+    color: var(--ink-fg);
+    font-family: var(--font-body);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-cream);
+    margin-bottom: 32px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 96px);
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0 0 24px;
+    color: var(--ink-fg);
+    max-width: 14ch;
+  }
+  h1 em {
+    font-family: var(--font-italic), 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold-cream);
+  }
+  p {
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(244, 239, 223, 0.75);
+    max-width: 540px;
+    margin: 0 0 40px;
+  }
+  a.home {
+    display: inline-flex; gap: 10px; align-items: center;
+    background: var(--gold-1);
+    color: #000C0E;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 200ms ease, transform 140ms ease;
+  }
+  a.home:hover { background: var(--gold-cream); transform: translateY(-1px); }
+</style>
+</head>
+<body>
+  <div class="code">404 · Page not found</div>
+  <h1>This page <em>isn't</em> here.</h1>
+  <p>The link may be old, or the address mistyped. Either way, the rest of the site is one tap away.</p>
+  <a class="home" href="/">Back to WE AI <span>→</span></a>
+</body>
+</html>

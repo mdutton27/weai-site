@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://weai.co.nz/sitemap.xml
