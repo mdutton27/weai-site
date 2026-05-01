@@ -125,8 +125,9 @@
   .page { max-width: 1480px; margin: 0 auto; padding: 0 48px; }
   ::selection { background: var(--gold-1); color: var(--night); }
 
-  /* Disable Fraunces' aggressive fi/fl ligatures + italic swash f-tails globally —
-     they fuse the dotless f+i into a single melted glyph at large sizes. */
+  /* Discretionary ligatures and stylistic alternates off across the board.
+     Originally added to tame Fraunces' aggressive f-tails; kept for Cormorant
+     to keep glyph rendering predictable at all sizes. */
   body, h1, h2, h3, h4, h5, h6, p, em, strong, span, div, text, .word-mark text, .nav-logo svg text, footer .wm-svg text {
     font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0, "swsh" 0, "salt" 0, "ss01" 0, "ss02" 0, "ss03" 0;
     font-variant-ligatures: none;
@@ -289,7 +290,7 @@
     stroke-linecap: round;
     paint-order: stroke;
   }
-  .word-mark .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
+  .word-mark .we { stroke: var(--teal-line); fill: var(--logo-we-fill); letter-spacing: 0; }
   .word-mark .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
 
   /* Light & teal themes — letters are darker than bg, so add a luminous outer
@@ -340,14 +341,16 @@
     padding-top: 40px;
   }
   .hero-lead {
-    font-size: 21px;
-    line-height: 1.55;
+    font-family: var(--font-italic);
+    font-size: 24px;
+    line-height: 1.5;
     color: var(--fg-on-dark);
     max-width: 640px;
   }
   .hero-lead em {
-    font-family: var(--font-display);
+    font-family: var(--font-italic);
     font-style: italic;
+    font-size: 1.2em;
     color: var(--gold-cream);
   }
   .hero-actions {
