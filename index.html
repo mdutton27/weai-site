@@ -1448,7 +1448,7 @@
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </button>
-    <a href="#contact" class="nav-cta">Let's have a chat →</a>
+    <a href="#contact" class="nav-cta">Let's have a coffee →</a>
   </div>
 </nav>
 
@@ -1807,7 +1807,7 @@
     <div class="close-cta-inner">
       <div class="kicker">Ready when you are</div>
       <h2>Let's have<br>a <em>yarn.</em></h2>
-      <p>Thirty minutes. No commitment, no slide deck. We'll tell you honestly if we can help — and where AI would make the biggest difference in your business right now.</p>
+      <p>Thirty minutes over coffee. No commitment, no slide deck. Human to human. We'll tell you honestly if we can help — and where AI would make the biggest difference in your business right now.</p>
 
       <form class="yarn-form" id="yarn-form" novalidate>
         <div class="yf-row">
@@ -2096,22 +2096,30 @@ render();
     setStatus('Sending…', '');
 
     // ── Submit ──────────────────────────────────────────
-    // No backend wired yet — fall back to opening a pre-filled mail draft so the
-    // form is functional today. Replace this block with a fetch() to your endpoint
-    // (e.g. Formspree, Netlify forms, /api/contact) when backend is ready.
+    // POSTs to /api/contact (Vercel serverless function in api/contact.js).
+    // The function re-validates server-side and sends an email via Resend.
     try {
-      const subject = encodeURIComponent(`New yarn request — ${name}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Company: ${fd.get('company') || '—'}\n` +
-        `Best contact: ${fd.get('contact_pref') || 'email'}\n\n` +
-        `Message:\n${fd.get('message') || '—'}\n`
-      );
-      window.location.href = `mailto:hello@weai.co.nz?subject=${subject}&body=${body}`;
-      setStatus('Opening your email — send to confirm.', 'ok');
+      const payload = Object.fromEntries(fd);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      let data = null;
+      try { data = await response.json(); } catch (_) {}
+
+      if (response.ok && data && data.ok) {
+        setStatus('Thanks — we\'ll be in touch.', 'ok');
+        form.reset();
+        // Re-stamp the time-trap so a second submission still validates.
+        if (loadedAt) loadedAt.value = String(Date.now());
+      } else {
+        const msg = (data && data.error) || 'Something went wrong. Email hello@weai.co.nz instead.';
+        setStatus(msg, 'err');
+      }
     } catch (err) {
-      setStatus('Something went wrong. Email hello@weai.co.nz instead.', 'err');
+      setStatus('Network error. Email hello@weai.co.nz instead.', 'err');
     } finally {
       submit.disabled = false;
     }
