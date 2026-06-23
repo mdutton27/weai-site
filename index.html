@@ -302,6 +302,35 @@
       drop-shadow(0 0 26px rgba(218, 165, 32, 0.55))
       drop-shadow(0 0 48px rgba(218, 165, 32, 0.30));
   }
+  /* Nav and footer wordmarks get the same glow treatment, scaled down for their smaller sizes. */
+  :root[data-theme="light"] .nav-logo svg .we,
+  :root[data-theme="teal"]  .nav-logo svg .we {
+    filter:
+      drop-shadow(0 0 2px rgba(79, 184, 190, 0.65))
+      drop-shadow(0 0 6px rgba(79, 184, 190, 0.40));
+  }
+  :root[data-theme="light"] .nav-logo svg .ai,
+  :root[data-theme="teal"]  .nav-logo svg .ai {
+    filter:
+      drop-shadow(0 0 1px rgba(237, 209, 151, 0.85))
+      drop-shadow(0 0 3px rgba(218, 165, 32, 0.75))
+      drop-shadow(0 0 7px rgba(218, 165, 32, 0.55))
+      drop-shadow(0 0 12px rgba(218, 165, 32, 0.30));
+  }
+  :root[data-theme="light"] footer .wm-svg .we,
+  :root[data-theme="teal"]  footer .wm-svg .we {
+    filter:
+      drop-shadow(0 0 2px rgba(79, 184, 190, 0.65))
+      drop-shadow(0 0 7px rgba(79, 184, 190, 0.40));
+  }
+  :root[data-theme="light"] footer .wm-svg .ai,
+  :root[data-theme="teal"]  footer .wm-svg .ai {
+    filter:
+      drop-shadow(0 0 1px rgba(237, 209, 151, 0.85))
+      drop-shadow(0 0 4px rgba(218, 165, 32, 0.75))
+      drop-shadow(0 0 9px rgba(218, 165, 32, 0.55))
+      drop-shadow(0 0 16px rgba(218, 165, 32, 0.30));
+  }
   /* draw-on animation removed — see note above the nav rule. */
 
   .hero-tag {
