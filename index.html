@@ -170,16 +170,26 @@
     overflow: visible;
     display: block;
   }
-  .nav-logo svg use {
-    /* heavier stroke for the small nav scale so the wireframe still reads */
+  .nav-logo svg text {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 120px;
+    letter-spacing: -0.04em;
     stroke-width: 2.4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke;
   }
   .nav-logo svg .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
-  .nav-logo svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); }
-  /* draw-on animations removed when switching from <text> to outlined <path> via <use>;
-     the legacy stroke-dasharray values (1200/4000) were tuned for synthetic text path-length
-     and would render as broken dashed patterns on the real outlined paths. Wordmark now renders
-     fully on load. */
+  .nav-logo svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
+  /* once-only signature draw */
+  .nav-logo svg .draw {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: navDraw 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .nav-logo svg .draw.ai { animation-delay: 0.4s; }
+  @keyframes navDraw { to { stroke-dashoffset: 0; } }
   .nav-meta {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -274,9 +284,7 @@
   }
   /* Shared styling for the outlined wordmark in all three positions (nav, hero, footer).
      The <use> elements reference symbols defined at the top of <body>; stroke/fill cascade through. */
-  .word-mark use,
-  .nav-logo svg use,
-  footer .wm-svg use {
+  .word-mark use {
     fill: none;
     stroke-width: 1.6;
     stroke-linejoin: round;
@@ -297,41 +305,13 @@
   :root[data-theme="light"] .word-mark .ai,
   :root[data-theme="teal"] .word-mark .ai {
     filter:
-      drop-shadow(0 0 3px rgba(237, 209, 151, 0.85))
-      drop-shadow(0 0 10px rgba(218, 165, 32, 0.75))
-      drop-shadow(0 0 26px rgba(218, 165, 32, 0.55))
-      drop-shadow(0 0 48px rgba(218, 165, 32, 0.30));
+      drop-shadow(0 0 3px rgba(237, 209, 151, 0.80))
+      drop-shadow(0 0 10px rgba(218, 165, 32, 0.65))
+      drop-shadow(0 0 22px rgba(218, 165, 32, 0.35));
   }
-  /* Nav and footer wordmarks get the same glow treatment, scaled down for their smaller sizes. */
-  :root[data-theme="light"] .nav-logo svg .we,
-  :root[data-theme="teal"]  .nav-logo svg .we {
-    filter:
-      drop-shadow(0 0 2px rgba(79, 184, 190, 0.65))
-      drop-shadow(0 0 6px rgba(79, 184, 190, 0.40));
-  }
-  :root[data-theme="light"] .nav-logo svg .ai,
-  :root[data-theme="teal"]  .nav-logo svg .ai {
-    filter:
-      drop-shadow(0 0 1px rgba(237, 209, 151, 0.85))
-      drop-shadow(0 0 3px rgba(218, 165, 32, 0.75))
-      drop-shadow(0 0 7px rgba(218, 165, 32, 0.55))
-      drop-shadow(0 0 12px rgba(218, 165, 32, 0.30));
-  }
-  :root[data-theme="light"] footer .wm-svg .we,
-  :root[data-theme="teal"]  footer .wm-svg .we {
-    filter:
-      drop-shadow(0 0 2px rgba(79, 184, 190, 0.65))
-      drop-shadow(0 0 7px rgba(79, 184, 190, 0.40));
-  }
-  :root[data-theme="light"] footer .wm-svg .ai,
-  :root[data-theme="teal"]  footer .wm-svg .ai {
-    filter:
-      drop-shadow(0 0 1px rgba(237, 209, 151, 0.85))
-      drop-shadow(0 0 4px rgba(218, 165, 32, 0.75))
-      drop-shadow(0 0 9px rgba(218, 165, 32, 0.55))
-      drop-shadow(0 0 16px rgba(218, 165, 32, 0.30));
-  }
-  /* draw-on animation removed — see note above the nav rule. */
+  /* Nav and footer wordmarks are rendered with <text> (Cormorant Garamond) at small scale —
+     no drop-shadow glow there. The font-rasterised strokes read crisper than scaled-down
+     vector paths plus a softening filter would. Hero keeps the path-based glow. */
 
   .hero-tag {
     text-align: center;
@@ -1400,12 +1380,18 @@
   footer .wm-svg {
     height: 56px; width: auto; overflow: visible; display: block;
   }
-  footer .wm-svg use {
-    /* heavier stroke for the small footer scale, same logic as nav */
+  footer .wm-svg text {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 120px;
+    letter-spacing: -0.04em;
     stroke-width: 2.2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke;
   }
   footer .wm-svg .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
-  footer .wm-svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); }
+  footer .wm-svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
   footer .meta {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -1455,8 +1441,8 @@
 <nav class="nav">
   <a href="#" class="nav-logo" aria-label="WE AI — home">
     <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <use href="#we-mark" class="we draw" x="0" y="10" width="200" height="88"/>
-      <use href="#ai-mark" class="ai draw" x="220" y="9" width="135" height="89"/>
+      <text class="we draw" x="0" y="104">WE</text>
+      <text class="ai draw" x="206" y="104">AI</text>
     </svg>
   </a>
   <div class="nav-meta">
@@ -1891,8 +1877,8 @@
 
 <footer>
   <svg class="wm-svg" viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-label="WE AI">
-    <use href="#we-mark" class="we" x="0" y="10" width="200" height="88"/>
-    <use href="#ai-mark" class="ai" x="220" y="9" width="135" height="89"/>
+    <text class="we" x="0" y="104">WE</text>
+    <text class="ai" x="206" y="104">AI</text>
   </svg>
   <div class="meta">
     <span>© 2026 WE AI Limited</span>
