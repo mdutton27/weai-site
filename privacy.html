@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en-NZ" data-theme="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#003E47" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000C0E" media="(prefers-color-scheme: dark)">
+
+<script>
+  (function () {
+    var theme = 'teal';
+    try {
+      var saved = localStorage.getItem('weai-theme');
+      if (saved === 'dark' || saved === 'teal' || saved === 'light') theme = saved;
+    } catch (e) {}
+    if (theme === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
+<title>Privacy policy — WE AI</title>
+<meta name="description" content="How WE AI Limited collects, uses and protects personal information, under the New Zealand Privacy Act 2020.">
+<link rel="canonical" href="https://weai.co.nz/privacy">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon-weai.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-weai.png">
+<link rel="apple-touch-icon" href="/assets/favicon-weai.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WE AI">
+<meta property="og:title" content="Privacy policy — WE AI">
+<meta property="og:description" content="How WE AI collects, uses and protects personal information.">
+<meta property="og:url" content="https://weai.co.nz/privacy">
+<meta property="og:locale" content="en_NZ">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/shared.css">
+<style>
+  .page-hero { padding-bottom: 32px; }
+  .policy { padding: 24px 0 96px; }
+  .policy .updated {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+    margin-bottom: 56px;
+  }
+  .policy section {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    padding: 44px 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+  }
+  .policy h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--ink-fg);
+  }
+  .policy h2 .n {
+    display: block;
+    font-family: var(--font-italic); font-style: italic;
+    font-size: 18px; color: var(--gold-cream);
+    margin-bottom: 8px;
+  }
+  .policy p, .policy li {
+    font-size: 17px; line-height: 1.65;
+    color: color-mix(in oklab, var(--ink-fg) 84%, transparent);
+    margin: 0 0 16px;
+  }
+  .policy ul { padding-left: 20px; margin: 0 0 16px; }
+  .policy li { margin-bottom: 8px; }
+  .policy a { color: var(--gold-cream); border-bottom: 1px solid color-mix(in oklab, var(--gold-cream) 40%, transparent); }
+  .policy a:hover { border-bottom-color: var(--gold-cream); }
+  .policy strong { color: var(--ink-fg); font-weight: 500; }
+  @media (max-width: 900px) {
+    .policy section { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo" aria-label="WE AI — home">
+    <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text class="we" x="0" y="104">WE</text>
+      <text class="ai" x="206" y="104">AI</text>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="/about">About</a>
+    <a href="/case-studies">Case studies</a>
+    <a href="/#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button id="theme-toggle" class="nav-theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <a href="/#contact" class="nav-cta">Let's have a coffee →</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <section class="page-hero">
+    <div class="kicker">Privacy · how we handle your information</div>
+    <h1>Short, because <em>we collect little.</em></h1>
+    <p class="lead">WE AI Limited is a New Zealand company and we handle personal information under the Privacy Act 2020. This page says what we collect, why, where it goes, and how to ask us about it. No tracking, no ad tech, no selling of data.</p>
+  </section>
+
+  <div class="policy">
+    <div class="updated">Last updated 22 September 2026</div>
+
+    <section>
+      <h2><span class="n">/01</span>What we collect</h2>
+      <div>
+        <p><strong>If you use the contact form</strong> we receive what you type: your name, email address, company (optional), how you'd like us to get in touch, and your message.</p>
+        <p><strong>If you email or call us</strong> we keep the correspondence and any notes we take.</p>
+        <p><strong>If you become a client</strong> we collect what the engagement needs — contact details for your team, and information about your business processes and systems. Where an engagement involves your customers' or staff's personal information, that's covered by a written agreement with you, and you stay the owner of it.</p>
+        <p><strong>Automatically</strong>, our hosting provider records standard server logs (IP address, browser type, pages requested, time) for security and to keep the site running. We don't run analytics, advertising pixels or tracking cookies. The only thing we store in your browser is your light/dark theme choice, which never leaves your device.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">/02</span>Why we collect it</h2>
+      <div>
+        <p>To reply to you, to scope and deliver work you've asked for, to invoice, and to meet our legal obligations. We don't use your information for marketing unless you've said we can, and you can withdraw that at any time by replying "stop" to anything we send.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">/03</span>Where it goes</h2>
+      <div>
+        <p>We don't sell or rent personal information. We share it only with the services we use to run the business, each under its own privacy and security terms:</p>
+        <ul>
+          <li><strong>Vercel</strong> hosts this website and processes server logs.</li>
+          <li><strong>Resend</strong> delivers contact-form submissions to our inbox by email.</li>
+          <li><strong>Google Fonts</strong> serves the typefaces on this site, which means Google's servers see your IP address when a page loads.</li>
+          <li>Our email, calendar, document and accounting providers, for ordinary correspondence and invoicing.</li>
+        </ul>
+        <p>Some of these providers store data outside New Zealand, mainly in the United States and Australia. Where that happens we rely on the provider's contractual commitments to protect your information to a standard comparable to the Privacy Act, as the Act allows.</p>
+        <p><strong>AI tools.</strong> We use AI services (principally Anthropic's Claude) in our own work. We use business-tier services whose terms do not permit training on our inputs, and we don't put client personal information into an AI tool unless the engagement agreement with you says we can and how.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">/04</span>How long we keep it</h2>
+      <div>
+        <p>Contact-form enquiries that don't lead to work are deleted within twelve months. Client records are kept for seven years after the engagement ends, because New Zealand tax law requires it, then deleted. Server logs are kept by our hosting provider for a short rolling period and then discarded.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">/05</span>How we protect it</h2>
+      <div>
+        <p>Access to our systems is limited to the two of us, protected by multi-factor authentication, and encrypted in transit and at rest by the providers above. Kevin Mason, our Data, Privacy &amp; Governance Lead, is responsible for how we handle information. If we ever have a privacy breach that's likely to cause you serious harm, we'll tell you and the Office of the Privacy Commissioner as the Act requires.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">/06</span>Your rights</h2>
+      <div>
+        <p>You can ask to see the personal information we hold about you, ask us to correct it, or ask us to delete it. Email <a href="mailto:hello@weai.co.nz">hello@weai.co.nz</a> and we'll respond within 20 working days, usually much sooner. If you're not happy with how we've handled something, you can complain to the <a href="https://www.privacy.org.nz/" rel="noopener">Office of the Privacy Commissioner</a>.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">/07</span>Changes</h2>
+      <div>
+        <p>If we change this policy we'll update the date at the top. If the change matters — say, we start using analytics — we'll say so plainly on this page rather than bury it.</p>
+        <p><strong>WE AI Limited</strong> · Wellington, Aotearoa New Zealand · <a href="mailto:hello@weai.co.nz">hello@weai.co.nz</a></p>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<footer>
+  <svg class="wm-svg" viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-label="WE AI">
+    <text class="we" x="0" y="104">WE</text>
+    <text class="ai" x="206" y="104">AI</text>
+  </svg>
+  <div class="links">
+    <a href="/about">About</a>
+    <a href="/case-studies">Case studies</a>
+    <a href="/#contact">Contact</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div class="meta">
+    <span>© 2026 WE AI Limited</span>
+    <span>Aotearoa New Zealand</span>
+    <span>AI that works</span>
+  </div>
+</footer>
+
+<script>
+(function initThemeToggle() {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var next = current === 'dark' ? 'teal' : 'dark';
+    if (next === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('weai-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

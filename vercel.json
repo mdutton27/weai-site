@@ -20,7 +20,7 @@
       ]
     },
     {
-      "source": "/tokens.css",
+      "source": "/(tokens|shared).css",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
       ]

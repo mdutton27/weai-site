@@ -1,0 +1,228 @@
+/* ============================================================
+   WE AI — shared chrome for inner pages (about, case-studies)
+   Mirrors the theme vars, nav and footer defined inline in
+   index.html. If index.html's nav/footer/theme CSS changes,
+   change it here too (or move index.html onto this file).
+   ============================================================ */
+
+:root {
+  /* DARK (default) */
+  --night: #000C0E;
+  --night-2: #001418;
+  --ink-fg: #F4EFDF;
+  --nav-bg: rgba(0, 12, 14, 0.85);
+  --teal-line: rgba(79, 184, 190, 0.55);
+  --gold-line: rgba(218, 165, 32, 0.85);
+  --logo-we-fill: rgba(79, 184, 190, 0.08);
+  --logo-ai-fill: rgba(218, 165, 32, 0.08);
+  --card-bg: rgba(0, 30, 34, 0.55);
+}
+:root[data-theme="light"] {
+  --night: #FFFFFF;
+  --night-2: #F5F7F7;
+  --paper: #FFFFFF;
+  --bone: #F0F2F2;
+  --ink-fg: #001E22;
+  --gold-cream: #8A6312;
+  --fg-on-dark: #001E22;
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --gold-deep: #8A6312;
+  --logo-we-fill: rgba(79, 184, 190, 0.10);
+  --logo-ai-fill: rgba(218, 165, 32, 0.10);
+  --teal-line: rgba(79, 184, 190, 0.85);
+  --gold-line: rgba(237, 209, 151, 0.85);
+  --card-bg: #F8FAFA;
+}
+:root[data-theme="teal"] {
+  --night: #003E47;
+  --night-2: #00565F;
+  --paper: #F8F5EE;
+  --bone: #EDE6D5;
+  --teal-ink: #001E22;
+  --gold-deep: #8A6312;
+  --ink-fg: #F4EFDF;
+  --nav-bg: rgba(0, 62, 71, 0.88);
+  --teal-line: rgba(79, 184, 190, 0.85);
+  --gold-line: rgba(237, 209, 151, 0.85);
+  --logo-we-fill: rgba(79, 184, 190, 0.10);
+  --logo-ai-fill: rgba(218, 165, 32, 0.10);
+  --card-bg: rgba(0, 30, 34, 0.55);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--fg-on-dark);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  transition: background 320ms ease, color 320ms ease;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.page { max-width: 1480px; margin: 0 auto; padding: 0 48px; }
+::selection { background: var(--gold-1); color: var(--night); }
+
+body, h1, h2, h3, h4, h5, h6, p, em, strong, span, div, text {
+  font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0, "swsh" 0, "salt" 0, "ss01" 0, "ss02" 0, "ss03" 0;
+  font-variant-ligatures: none;
+}
+em, i, .nav-logo svg .ai, footer .wm-svg .ai {
+  font-family: var(--font-italic), 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  padding: 24px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+}
+.nav-logo { display: flex; align-items: center; line-height: 0; }
+.nav-logo svg { height: 44px; width: auto; display: block; overflow: visible; }
+.nav-logo svg text, footer .wm-svg text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 120px;
+  letter-spacing: -0.04em;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke;
+}
+footer .wm-svg text { stroke-width: 2.2; }
+.nav-logo svg .we, footer .wm-svg .we { stroke: var(--teal-line); fill: var(--logo-we-fill); }
+.nav-logo svg .ai, footer .wm-svg .ai { stroke: var(--gold-line); fill: var(--logo-ai-fill); font-style: italic; }
+
+.nav-links {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+  display: flex; gap: 28px;
+}
+.nav-links a { transition: color 200ms ease; padding-bottom: 2px; border-bottom: 1px solid transparent; }
+.nav-links a:hover { color: var(--gold-cream); }
+.nav-links a[aria-current="page"] { color: var(--ink-fg); border-bottom-color: var(--gold-1); }
+
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.nav-cta {
+  background: var(--gold-1);
+  color: var(--night);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 200ms ease;
+}
+.nav-cta:hover { background: var(--gold-cream); }
+.nav-theme {
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent;
+  color: var(--ink-fg);
+  border: 1px solid color-mix(in oklab, var(--ink-fg) 22%, transparent);
+  border-radius: 999px;
+  cursor: pointer; padding: 0;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+.nav-theme:hover { border-color: var(--gold-cream); color: var(--gold-cream); }
+.nav-theme:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.35); }
+.nav-theme svg { width: 16px; height: 16px; display: block; }
+.nav-theme .icon-sun { display: none; }
+.nav-theme .icon-moon { display: block; }
+:root:not([data-theme]) .nav-theme .icon-sun,
+:root[data-theme="dark"] .nav-theme .icon-sun { display: block; }
+:root:not([data-theme]) .nav-theme .icon-moon,
+:root[data-theme="dark"] .nav-theme .icon-moon { display: none; }
+
+/* ─── SHARED PAGE PIECES ─── */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-cream);
+  margin-bottom: 20px;
+}
+.page-hero { padding: 96px 0 56px; }
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 28px;
+  color: var(--ink-fg);
+}
+.page-hero h1 em { color: var(--gold-cream); font-weight: 500; }
+.page-hero .lead {
+  font-size: 19px;
+  line-height: 1.55;
+  color: color-mix(in oklab, var(--ink-fg) 78%, transparent);
+  margin: 0;
+}
+.page-hero .lead em { color: var(--gold-cream); font-size: 1.08em; }
+.rule { height: 1px; background: color-mix(in oklab, var(--ink-fg) 10%, transparent); margin: 0; }
+
+.cta-band {
+  padding: 96px 0 112px;
+  text-align: center;
+}
+.cta-band h2 {
+  color: var(--ink-fg);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+.cta-band h2 em { color: var(--gold-cream); }
+.cta-band p { max-width: 520px; margin: 0 auto 32px; color: color-mix(in oklab, var(--ink-fg) 72%, transparent); line-height: 1.6; }
+.btn-gold {
+  display: inline-block;
+  background: var(--gold-1); color: var(--night);
+  padding: 16px 30px; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  transition: background 200ms ease;
+}
+.btn-gold:hover { background: var(--gold-cream); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 56px 48px 32px;
+  border-top: 1px solid color-mix(in oklab, var(--ink-fg) 8%, transparent);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+footer .wm-svg { height: 56px; width: auto; overflow: visible; display: block; }
+footer .meta {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: color-mix(in oklab, var(--ink-fg) 50%, transparent);
+}
+footer .links { display: flex; gap: 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in oklab, var(--ink-fg) 50%, transparent); }
+footer .links a:hover { color: var(--gold-cream); }
+footer .meta span + span::before { content: "·"; margin: 0 12px; color: var(--gold-1); }
+
+@media (max-width: 1100px) {
+  .page, .nav, footer { padding-left: 28px; padding-right: 28px; }
+}
+@media (max-width: 760px) {
+  .nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .page { padding: 0 20px; }
+  .page-hero { padding: 56px 0 36px; }
+  footer { padding: 48px 24px 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en-NZ" data-theme="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#003E47" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000C0E" media="(prefers-color-scheme: dark)">
+
+<script>
+  (function () {
+    var theme = 'teal';
+    try {
+      var saved = localStorage.getItem('weai-theme');
+      if (saved === 'dark' || saved === 'teal' || saved === 'light') theme = saved;
+    } catch (e) {}
+    if (theme === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
+<title>Case studies — WE AI</title>
+<meta name="description" content="What WE AI has built for New Zealand businesses: the problem, the working tool, and what changed by Friday.">
+<link rel="canonical" href="https://weai.co.nz/case-studies">
+<!-- Remove once real case studies are live -->
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon-weai.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-weai.png">
+<link rel="apple-touch-icon" href="/assets/favicon-weai.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WE AI">
+<meta property="og:title" content="Case studies — WE AI">
+<meta property="og:description" content="The problem, the working tool, and what changed by Friday.">
+<meta property="og:url" content="https://weai.co.nz/case-studies">
+<meta property="og:image" content="https://weai.co.nz/assets/favicon-weai.png">
+<meta property="og:locale" content="en_NZ">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/shared.css">
+<style>
+  .studies { padding: 24px 0 96px; }
+  .study {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    padding: 72px 0;
+    border-top: 1px solid color-mix(in oklab, var(--ink-fg) 10%, transparent);
+  }
+  .study:first-child { border-top: 0; }
+  .study .num {
+    font-family: var(--font-italic); font-style: italic;
+    font-size: 22px; color: var(--gold-cream); margin-bottom: 14px;
+  }
+  .study .client {
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 60%, transparent);
+    margin-bottom: 18px;
+  }
+  .study h2 {
+    color: var(--ink-fg);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.04; letter-spacing: -0.02em;
+    margin: 0 0 28px;
+  }
+  .study h2 em { color: var(--gold-cream); }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 24px; max-width: 420px; }
+  .stats .v {
+    font-family: var(--font-display);
+    font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -0.02em;
+    color: var(--ink-fg);
+  }
+  .stats .v em { font-size: 0.5em; color: var(--gold-cream); margin-left: 2px; }
+  .stats .l {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+    margin-top: 8px;
+  }
+  .study-body h3 {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-cream);
+    margin: 0 0 12px;
+  }
+  .study-body p {
+    font-size: 17px; line-height: 1.65;
+    color: color-mix(in oklab, var(--ink-fg) 84%, transparent);
+    margin: 0 0 32px;
+  }
+  .study-body .tools { display: flex; flex-wrap: wrap; gap: 8px; margin: -16px 0 32px; }
+  .study-body .tools span {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 18%, transparent);
+    color: color-mix(in oklab, var(--ink-fg) 70%, transparent);
+  }
+  .quote {
+    border-left: 2px solid var(--gold-1);
+    padding: 4px 0 4px 24px;
+  }
+  .quote .qt {
+    font-family: var(--font-italic); font-style: italic;
+    font-size: 24px; line-height: 1.3;
+    color: var(--ink-fg);
+  }
+  .quote .qa {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+    margin-top: 12px;
+  }
+  .placeholder-note {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold-1);
+    border: 1px dashed color-mix(in oklab, var(--gold-1) 60%, transparent);
+    padding: 12px 16px; border-radius: 4px;
+    margin-bottom: 40px; display: inline-block;
+  }
+  @media (max-width: 900px) {
+    .study { grid-template-columns: 1fr; gap: 36px; padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo" aria-label="WE AI — home">
+    <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text class="we" x="0" y="104">WE</text>
+      <text class="ai" x="206" y="104">AI</text>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="/about">About</a>
+    <a href="/case-studies" aria-current="page">Case studies</a>
+    <a href="/#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button id="theme-toggle" class="nav-theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <a href="/#contact" class="nav-cta">Let's have a coffee →</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <section class="page-hero">
+    <div class="kicker">Case studies · what we've built</div>
+    <h1>What changed <em>by Friday.</em></h1>
+    <p class="lead">Each engagement below is a real business, a real process that was eating their week, and a working tool their team now uses. The problem, what we built, and what it saved.</p>
+  </section>
+
+  <section class="studies">
+
+    <!-- ══════════════════════════════════════════════════════════
+         TEMPLATE — duplicate this <article> per engagement.
+         Fill: client descriptor, headline, 2–4 stats, problem,
+         what we built, tools, outcome, optional quote.
+         Delete .placeholder-note when real.
+         ══════════════════════════════════════════════════════════ -->
+    <article class="study">
+      <div>
+        <div class="placeholder-note">Placeholder — awaiting real engagement</div>
+        <div class="num">/01</div>
+        <div class="client">[Industry] · [Size] · [Region]</div>
+        <h2>[Headline: the before,<br>then <em>the after.</em>]</h2>
+        <div class="stats">
+          <div><div class="v">0<em>hrs</em></div><div class="l">Saved per week</div></div>
+          <div><div class="v">0<em>wks</em></div><div class="l">Kickoff to live</div></div>
+          <div><div class="v">$0<em>K</em></div><div class="l">Annual cost recovered</div></div>
+          <div><div class="v">0<em>mo</em></div><div class="l">To pay for itself</div></div>
+        </div>
+      </div>
+      <div class="study-body">
+        <h3>The problem</h3>
+        <p>[What the process was, who was doing it, what it cost them in time and attention. One paragraph, plain English, no jargon.]</p>
+        <h3>What we built</h3>
+        <p>[The working tool. What it pulls from, what it produces, who signs it off. Say what stayed human.]</p>
+        <div class="tools"><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span></div>
+        <h3>What changed</h3>
+        <p>[The outcome in the owner's terms — hours, dollars, decisions made sooner. What the team does with the time now.]</p>
+        <div class="quote">
+          <div class="qt">"[Optional quote in the client's own words.]"</div>
+          <div class="qa">[Role] · [Region]</div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="cta-band">
+    <div class="kicker">Next step</div>
+    <h2>Your process <em>could be next.</em></h2>
+    <p>Forty minutes, no deck. Tell us what eats your team's week and we'll tell you honestly whether AI can help.</p>
+    <a href="/#contact" class="btn-gold">Let's have a coffee →</a>
+  </section>
+
+</div>
+
+<footer>
+  <svg class="wm-svg" viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg" aria-label="WE AI">
+    <text class="we" x="0" y="104">WE</text>
+    <text class="ai" x="206" y="104">AI</text>
+  </svg>
+  <div class="links">
+    <a href="/about">About</a>
+    <a href="/case-studies">Case studies</a>
+    <a href="/#contact">Contact</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div class="meta">
+    <span>© 2026 WE AI Limited</span>
+    <span>Aotearoa New Zealand</span>
+    <span>AI that works</span>
+  </div>
+</footer>
+
+<script>
+(function initThemeToggle() {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var current = document.documentElement.getAttribute('data-theme') || 'dark';
+    var next = current === 'dark' ? 'teal' : 'dark';
+    if (next === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('weai-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
