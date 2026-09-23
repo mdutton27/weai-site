@@ -161,7 +161,7 @@
   <section class="page-hero">
     <div class="kicker">Case studies · what we've built</div>
     <h1>What changed <em>by Friday.</em></h1>
-    <p class="lead">Two things we've built with Claude — one for a client, one for ourselves. Real problems, real numbers, and honest about what went wrong along the way. Each one: the problem, what we built, and what changed.</p>
+    <p class="lead">Two things we've built with Claude — one for a client, one for ourselves. Real problems and real numbers: what was eating the week, what we built, and what changed.</p>
   </section>
 
   <section class="studies">
@@ -173,9 +173,9 @@
         <h2>A week of specialist analysis, now <em>a five-minute upload.</em></h2>
         <div class="stats">
           <div><div class="v">$5<em>K</em></div><div class="l">Saved per study, every study</div></div>
-          <div><div class="v">40<em>→1 hr</em></div><div class="l">Analyst time per study</div></div>
-          <div><div class="v">170<em>+</em></div><div class="l">Commits, one person directing</div></div>
-          <div><div class="v">0</div><div class="l">AI calls in the running product</div></div>
+          <div><div class="v">1<em>wk → min</em></div><div class="l">Turnaround, upload to results</div></div>
+          <div><div class="v">3<em>→10</em></div><div class="l">Spreadsheets in, analyses out</div></div>
+          <div><div class="v">0</div><div class="l">Generative AI in the product</div></div>
         </div>
         <div class="more"><a href="https://kiwipop.site" rel="noopener">kiwipop.site →</a></div>
       </div>
@@ -183,10 +183,10 @@
         <h3>The problem</h3>
         <p>Zealandia counts its little spotted kiwi the hard way: catch, band, measure, release, and record it all in three spreadsheets. Turning those into answers — how many birds, are they surviving, are they in condition to breed, will the population still be viable in fifty years — was a specialist job across half a dozen tools. Each study took about a week and cost the sanctuary around NZ$5,000 to commission, so it was only run when it absolutely had to be.</p>
         <h3>What we built</h3>
-        <p>KiwiPop: a password-protected web app where staff upload the same three workbooks and get the whole study back in minutes — population estimates, body condition, survival, breeding, movement mapping, a fifty-year viability model, and an avian-flu stress test across eight species. It was built with Claude Code by one person over about nine months. Along the way the AI audited the sanctuary's raw Excel files and found that a locale round-trip had silently swapped day and month on every ambiguous date, turned an 80-hour survey into 1,472 hours, and destroyed sixteen microchip numbers. It wrote the parser that reverses the damage.</p>
+        <p>KiwiPop: a password-protected web app where staff upload the same three workbooks and get the whole study back in minutes — population estimates, body condition, survival, breeding, movement mapping, a fifty-year viability model, and an avian-flu stress test across eight species. Built with Claude Code by one person, in the hours between other work. Along the way it audited the sanctuary's raw Excel files and found that a locale round-trip had silently swapped day and month on every ambiguous date, turned an 80-hour survey into 1,472 hours, and mangled sixteen microchip numbers. It wrote the parser that reverses the damage, and handed back repaired workbooks with every fix highlighted.</p>
         <div class="tools"><span>Excel</span><span>Python</span><span>Claude Code</span><span>Railway</span></div>
         <h3>What changed</h3>
-        <p>The NZ$5,000 fee is gone. Reruns cost nothing, so the analysis happens whenever new captures come in rather than once a year. Questions like "what if we translocate fifteen birds every three years?" get answered in the meeting where they're asked. And because a conservation organisation's species records are sensitive, the product itself contains no generative AI at all — the maths is classical statistics, deterministic and reproducible.</p>
+        <p>The NZ$5,000 fee is gone. Reruns cost nothing, so the analysis happens whenever new captures come in rather than once a year. Questions like "what if we translocate fifteen birds every three years?" get answered in the meeting where they're asked. And because a conservation organisation's species records are sensitive, the product itself contains no generative AI at all — the maths is classical statistics, deterministic and reproducible, and the data never leaves the sanctuary's own tool.</p>
         <div class="quote">
           <div class="qt">"AI built the tool. The tool itself is deterministic statistics. No generative AI ever sees Zealandia's species data."</div>
           <div class="qa">From the build journal</div>
@@ -202,21 +202,21 @@
         <div class="stats">
           <div><div class="v">3<em>mo</em></div><div class="l">First commit to self-running</div></div>
           <div><div class="v">373</div><div class="l">Bills, with verified vote records</div></div>
-          <div><div class="v">9,200<em>+</em></div><div class="l">Citizen votes cast so far</div></div>
+          <div><div class="v">9,200<em>+</em></div><div class="l">Citizen votes in the first 45 days</div></div>
           <div><div class="v">1</div><div class="l">Human step per day</div></div>
         </div>
         <div class="more"><a href="https://fivemillionvoices.nz" rel="noopener">fivemillionvoices.nz →</a></div>
       </div>
       <div class="study-body">
         <h3>The problem</h3>
-        <p>Every reading of every bill is on the record in Hansard, but it's scattered across two government websites, written in parliamentary procedure, and the corrected version lags by about nine months. There's no votes API. Most votes are party votes, so any tool that says "your MP voted X" is usually making it up. And a civic tool read by partisan audiences dies the first time someone finds a wrong tally or a loaded word.</p>
+        <p>Every reading of every bill is on the record in Hansard, but it's scattered across two government websites, written in parliamentary procedure, and the corrected version lags by about nine months. There's no votes API. Most votes are party votes, so any tool that says "your MP voted X" is usually making it up. And a civic tool read by partisan audiences has to be right every time.</p>
         <h3>What we built</h3>
-        <p>A platform where you vote on real bills in plain English and see how Parliament actually voted — with a regional map of what New Zealanders said, next to what the House did. Behind it, an ingestion engine that parses Hansard, a Postgres backend with per-vote provenance, and a daily pipeline that scans, harvests, reconciles and posts to social media with no one at the keyboard. Claude played six roles — engineer, researcher, data operator, drafter, designer and marketer — each with a different level of trust. Nothing the public reads about a bill goes live until a person flips the review flag.</p>
+        <p>A platform where you vote on real bills in plain English and see how Parliament actually voted — with a regional map of what New Zealanders said, next to what the House did. Behind it, an engine that reads Hansard and links every vote to its bill with provenance attached, and a daily pipeline that scans for new bills, harvests the votes, drafts a neutral summary of each, and posts to social media — all on schedule, with no one at the keyboard. Every summary the public reads has been reviewed and approved by a person before it goes live.</p>
         <div class="tools"><span>Hansard</span><span>Supabase</span><span>Vercel</span><span>Claude Code</span><span>Cowork</span></div>
         <h3>What changed</h3>
-        <p>One person built and now runs a content-complete civic product in about three months — 640 commits, 329 human-reviewed bill summaries, and a social channel that has published 32 posts on its own. It also produced a failure log we'd rather share than hide: provisional tallies that shipped before their "provisional" badge, a search bug that looked like a clean "nothing new", functions that sat committed but undeployed for six days. Most of the engineering went into making those failures loud.</p>
+        <p>One person built and now runs a complete civic product covering the current Parliament — 329 plain-English bill summaries, verified voting records for every reading, and a social channel that publishes daily on its own. New Zealanders cast more than 9,200 votes on it in its first 45 days, with no advertising spend. The daily operation needs one human step: reviewing the summaries that appear in the morning. Everything else runs itself and reports back. Provisional results are labelled as provisional and corrected automatically when the official record catches up, which is how the platform has published outcomes a week ahead of Parliament's own API.</p>
         <div class="quote">
-          <div class="qt">"AI makes a single person fast, and it makes mistakes that look like success."</div>
+          <div class="qt">"A human still signs off every word the public reads about a bill. Everything else, we automated."</div>
           <div class="qa">Michael Dutton · WE AI</div>
         </div>
       </div>
