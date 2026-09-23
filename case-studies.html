@@ -123,6 +123,57 @@
     padding: 12px 16px; border-radius: 4px;
     margin-bottom: 40px; display: inline-block;
   }
+  /* ─── CASE CAROUSEL — slide 1 is always the stat card; no autoplay ─── */
+  .carousel { position: relative; }
+  .carousel .slides { display: grid; }
+  .carousel .slide {
+    grid-area: 1 / 1;
+    opacity: 0; visibility: hidden;
+    transition: opacity 320ms ease, visibility 0s linear 320ms;
+  }
+  .carousel .slide.is-active { opacity: 1; visibility: visible; transition: opacity 320ms ease, visibility 0s; }
+  .carousel figure.slide {
+    margin: 0;
+    display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  }
+  .carousel figure.slide img {
+    width: 100%; height: auto; max-height: 560px; object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 12%, transparent);
+    background: var(--card-bg);
+  }
+  .carousel .zoom { display: block; cursor: zoom-in; }
+  .carousel figcaption {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
+  }
+  .car-nav { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+  .car-nav[hidden] { display: none; }
+  .car-btn {
+    width: 36px; height: 36px; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--ink-fg); cursor: pointer; padding: 0;
+    border: 1px solid color-mix(in oklab, var(--ink-fg) 22%, transparent);
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+  .car-btn:hover { border-color: var(--gold-cream); color: var(--gold-cream); }
+  .car-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(218,165,32,0.35); }
+  .car-btn svg { width: 14px; height: 14px; }
+  .car-dots { display: flex; gap: 8px; }
+  .car-dots button {
+    width: 8px; height: 8px; padding: 0; border-radius: 999px; cursor: pointer;
+    border: 0; background: color-mix(in oklab, var(--ink-fg) 25%, transparent);
+    transition: background 200ms ease, width 200ms ease;
+  }
+  .car-dots button[aria-current="true"] { background: var(--gold-1); width: 22px; }
+  .car-count {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+    color: color-mix(in oklab, var(--ink-fg) 50%, transparent);
+    margin-left: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .carousel .slide, .carousel .slide.is-active { transition: none; }
+  }
   @media (max-width: 900px) {
     .study { grid-template-columns: 1fr; gap: 36px; padding: 56px 0; }
   }
@@ -167,7 +218,9 @@
   <section class="studies">
 
     <article class="study" id="kiwipop">
-      <div>
+      <div class="carousel" data-carousel aria-roledescription="carousel" aria-label="Ecosanctuary case study">
+        <div class="slides">
+          <div class="slide is-active" aria-roledescription="slide" aria-label="1">
         <div class="num">/01</div>
         <div class="client">An ecosanctuary · Conservation · Aotearoa</div>
         <h2>A week of specialist analysis, now <em>a five-minute upload.</em></h2>
@@ -178,6 +231,27 @@
           <div><div class="v">0</div><div class="l">Generative AI in the product</div></div>
         </div>
         <div class="more"><a href="https://kiwipop.site" rel="noopener">kiwipop.site →</a></div>
+          </div>
+          <figure class="slide" aria-roledescription="slide">
+            <a href="/assets/cases/kiwipop-home.webp" target="_blank" rel="noopener" class="zoom" aria-label="Open image full size"><img src="/assets/cases/kiwipop-home.webp" alt="KiwiPop start page: kiwi population modelling" width="1600" height="777" loading="lazy"></a>
+            <figcaption>The front door — three spreadsheets in, the full study out</figcaption>
+          </figure>
+          <figure class="slide" aria-roledescription="slide">
+            <a href="/assets/cases/kiwipop-projection.webp" target="_blank" rel="noopener" class="zoom" aria-label="Open image full size"><img src="/assets/cases/kiwipop-projection.webp" alt="Fifty-year population projection comparing a baseline with a flash-flood shock" width="1600" height="1137" loading="lazy"></a>
+            <figcaption>Fifty-year projection · a flash-flood shock, then recovery · demo data</figcaption>
+          </figure>
+          <figure class="slide" aria-roledescription="slide">
+            <a href="/assets/cases/kiwipop-movement.webp" target="_blank" rel="noopener" class="zoom" aria-label="Open image full size"><img src="/assets/cases/kiwipop-movement.webp" alt="Movement map showing every capture location and displacement statistics" width="1600" height="1129" loading="lazy"></a>
+            <figcaption>Every capture on the map, with movement between recaptures · demo data</figcaption>
+          </figure>
+          <!-- Screenshots show synthetic demo data, not the sanctuary's records. -->
+        </div>
+        <div class="car-nav" hidden>
+          <button type="button" class="car-btn" data-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="car-dots"></div>
+          <button type="button" class="car-btn" data-next aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+          <span class="car-count" aria-hidden="true"></span>
+        </div>
       </div>
       <div class="study-body">
         <h3>The problem</h3>
@@ -197,7 +271,9 @@
     </article>
 
     <article class="study" id="five-million-voices">
-      <div>
+      <div class="carousel" data-carousel aria-roledescription="carousel" aria-label="Five Million Voices case study">
+        <div class="slides">
+          <div class="slide is-active" aria-roledescription="slide" aria-label="1">
         <div class="num">/02</div>
         <div class="client">Five Million Voices · Civic tech · Aotearoa <span class="ours">Our own build</span></div>
         <h2>What Parliament promised is easy to find. <em>What it did, wasn't.</em></h2>
@@ -208,6 +284,15 @@
           <div><div class="v">1</div><div class="l">Human step per day</div></div>
         </div>
         <div class="more"><a href="https://fivemillionvoices.nz" rel="noopener">fivemillionvoices.nz →</a></div>
+          </div>
+          <!-- Five Million Voices images go here: <figure class="slide" aria-roledescription="slide"><img src="/assets/cases/NAME.webp" alt="" loading="lazy"><figcaption></figcaption></figure> -->
+        </div>
+        <div class="car-nav" hidden>
+          <button type="button" class="car-btn" data-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="car-dots"></div>
+          <button type="button" class="car-btn" data-next aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+          <span class="car-count" aria-hidden="true"></span>
+        </div>
       </div>
       <div class="study-body">
         <h3>The problem</h3>
@@ -267,6 +352,53 @@
     try { localStorage.setItem('weai-theme', next); } catch (e) {}
   });
 })();
+</script>
+
+<script>
+// Case-study carousels: slide 1 (the stat card) always shows on load.
+// No autoplay — moves only when the reader clicks, uses arrow keys, or swipes.
+document.querySelectorAll('[data-carousel]').forEach(function (car) {
+  var slides = Array.prototype.slice.call(car.querySelectorAll('.slide'));
+  var nav = car.querySelector('.car-nav');
+  if (slides.length < 2) return;            // single slide: no controls
+  nav.hidden = false;
+  var dotsWrap = car.querySelector('.car-dots');
+  var count = car.querySelector('.car-count');
+  var i = 0;
+  var dots = slides.map(function (_, n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Go to slide ' + (n + 1));
+    b.addEventListener('click', function () { go(n); });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (sl, k) {
+      var on = k === i;
+      sl.classList.toggle('is-active', on);
+      sl.setAttribute('aria-hidden', on ? 'false' : 'true');
+      sl.inert = !on;
+    });
+    dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    count.textContent = (i + 1) + ' / ' + slides.length;
+  }
+  car.querySelector('[data-prev]').addEventListener('click', function () { go(i - 1); });
+  car.querySelector('[data-next]').addEventListener('click', function () { go(i + 1); });
+  car.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { go(i - 1); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { go(i + 1); e.preventDefault(); }
+  });
+  var x0 = null;
+  car.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') x0 = e.clientX; });
+  car.addEventListener('pointerup', function (e) {
+    if (x0 === null) return;
+    var dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1);
+  });
+  go(0);
+});
 </script>
 </body>
 </html>
