@@ -19,10 +19,8 @@
 </script>
 
 <title>Case studies — WE AI</title>
-<meta name="description" content="What WE AI has built for New Zealand businesses: the problem, the working tool, and what changed by Friday.">
+<meta name="description" content="What WE AI has built with Claude: a population-modelling platform for Zealandia that replaced a NZ$5,000-per-study outsourced analysis, and Five Million Voices, a civic platform run by one person and an AI.">
 <link rel="canonical" href="https://weai.co.nz/case-studies">
-<!-- Remove once real case studies are live -->
-<meta name="robots" content="noindex">
 
 <link rel="icon" type="image/svg+xml" href="/assets/favicon-weai.svg">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-weai.png">
@@ -114,6 +112,10 @@
     color: color-mix(in oklab, var(--ink-fg) 55%, transparent);
     margin-top: 12px;
   }
+  .study .more { margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .study .more a { color: var(--gold-cream); border-bottom: 1px solid color-mix(in oklab, var(--gold-cream) 40%, transparent); padding-bottom: 2px; }
+  .study .more a:hover { border-bottom-color: var(--gold-cream); }
+  .study .ours { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-1); border: 1px solid color-mix(in oklab, var(--gold-1) 45%, transparent); padding: 5px 10px; border-radius: 999px; margin-left: 10px; vertical-align: middle; }
   .placeholder-note {
     font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gold-1);
@@ -159,41 +161,63 @@
   <section class="page-hero">
     <div class="kicker">Case studies · what we've built</div>
     <h1>What changed <em>by Friday.</em></h1>
-    <p class="lead">Each engagement below is a real business, a real process that was eating their week, and a working tool their team now uses. The problem, what we built, and what it saved.</p>
+    <p class="lead">Two things we've built with Claude — one for a client, one for ourselves. Real problems, real numbers, and honest about what went wrong along the way. Each one: the problem, what we built, and what changed.</p>
   </section>
 
   <section class="studies">
 
-    <!-- ══════════════════════════════════════════════════════════
-         TEMPLATE — duplicate this <article> per engagement.
-         Fill: client descriptor, headline, 2–4 stats, problem,
-         what we built, tools, outcome, optional quote.
-         Delete .placeholder-note when real.
-         ══════════════════════════════════════════════════════════ -->
-    <article class="study">
+    <article class="study" id="kiwipop">
       <div>
-        <div class="placeholder-note">Placeholder — awaiting real engagement</div>
         <div class="num">/01</div>
-        <div class="client">[Industry] · [Size] · [Region]</div>
-        <h2>[Headline: the before,<br>then <em>the after.</em>]</h2>
+        <div class="client">Zealandia Te Māra a Tāne · Conservation · Wellington</div>
+        <h2>A week of specialist analysis, now <em>a five-minute upload.</em></h2>
         <div class="stats">
-          <div><div class="v">0<em>hrs</em></div><div class="l">Saved per week</div></div>
-          <div><div class="v">0<em>wks</em></div><div class="l">Kickoff to live</div></div>
-          <div><div class="v">$0<em>K</em></div><div class="l">Annual cost recovered</div></div>
-          <div><div class="v">0<em>mo</em></div><div class="l">To pay for itself</div></div>
+          <div><div class="v">$5<em>K</em></div><div class="l">Saved per study, every study</div></div>
+          <div><div class="v">40<em>→1 hr</em></div><div class="l">Analyst time per study</div></div>
+          <div><div class="v">170<em>+</em></div><div class="l">Commits, one person directing</div></div>
+          <div><div class="v">0</div><div class="l">AI calls in the running product</div></div>
         </div>
+        <div class="more"><a href="https://kiwipop.site" rel="noopener">kiwipop.site →</a></div>
       </div>
       <div class="study-body">
         <h3>The problem</h3>
-        <p>[What the process was, who was doing it, what it cost them in time and attention. One paragraph, plain English, no jargon.]</p>
+        <p>Zealandia counts its little spotted kiwi the hard way: catch, band, measure, release, and record it all in three spreadsheets. Turning those into answers — how many birds, are they surviving, are they in condition to breed, will the population still be viable in fifty years — was a specialist job across half a dozen tools. Each study took about a week and cost the sanctuary around NZ$5,000 to commission, so it was only run when it absolutely had to be.</p>
         <h3>What we built</h3>
-        <p>[The working tool. What it pulls from, what it produces, who signs it off. Say what stayed human.]</p>
-        <div class="tools"><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span></div>
+        <p>KiwiPop: a password-protected web app where staff upload the same three workbooks and get the whole study back in minutes — population estimates, body condition, survival, breeding, movement mapping, a fifty-year viability model, and an avian-flu stress test across eight species. It was built with Claude Code by one person over about nine months. Along the way the AI audited the sanctuary's raw Excel files and found that a locale round-trip had silently swapped day and month on every ambiguous date, turned an 80-hour survey into 1,472 hours, and destroyed sixteen microchip numbers. It wrote the parser that reverses the damage.</p>
+        <div class="tools"><span>Excel</span><span>Python</span><span>Claude Code</span><span>Railway</span></div>
         <h3>What changed</h3>
-        <p>[The outcome in the owner's terms — hours, dollars, decisions made sooner. What the team does with the time now.]</p>
+        <p>The NZ$5,000 fee is gone. Reruns cost nothing, so the analysis happens whenever new captures come in rather than once a year. Questions like "what if we translocate fifteen birds every three years?" get answered in the meeting where they're asked. And because a conservation organisation's species records are sensitive, the product itself contains no generative AI at all — the maths is classical statistics, deterministic and reproducible.</p>
         <div class="quote">
-          <div class="qt">"[Optional quote in the client's own words.]"</div>
-          <div class="qa">[Role] · [Region]</div>
+          <div class="qt">"AI built the tool. The tool itself is deterministic statistics. No generative AI ever sees Zealandia's species data."</div>
+          <div class="qa">From the build journal</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="study" id="five-million-voices">
+      <div>
+        <div class="num">/02</div>
+        <div class="client">Five Million Voices · Civic tech · Aotearoa <span class="ours">Our own build</span></div>
+        <h2>What Parliament promised is easy to find. <em>What it did, wasn't.</em></h2>
+        <div class="stats">
+          <div><div class="v">3<em>mo</em></div><div class="l">First commit to self-running</div></div>
+          <div><div class="v">373</div><div class="l">Bills, with verified vote records</div></div>
+          <div><div class="v">9,200<em>+</em></div><div class="l">Citizen votes cast so far</div></div>
+          <div><div class="v">1</div><div class="l">Human step per day</div></div>
+        </div>
+        <div class="more"><a href="https://fivemillionvoices.nz" rel="noopener">fivemillionvoices.nz →</a></div>
+      </div>
+      <div class="study-body">
+        <h3>The problem</h3>
+        <p>Every reading of every bill is on the record in Hansard, but it's scattered across two government websites, written in parliamentary procedure, and the corrected version lags by about nine months. There's no votes API. Most votes are party votes, so any tool that says "your MP voted X" is usually making it up. And a civic tool read by partisan audiences dies the first time someone finds a wrong tally or a loaded word.</p>
+        <h3>What we built</h3>
+        <p>A platform where you vote on real bills in plain English and see how Parliament actually voted — with a regional map of what New Zealanders said, next to what the House did. Behind it, an ingestion engine that parses Hansard, a Postgres backend with per-vote provenance, and a daily pipeline that scans, harvests, reconciles and posts to social media with no one at the keyboard. Claude played six roles — engineer, researcher, data operator, drafter, designer and marketer — each with a different level of trust. Nothing the public reads about a bill goes live until a person flips the review flag.</p>
+        <div class="tools"><span>Hansard</span><span>Supabase</span><span>Vercel</span><span>Claude Code</span><span>Cowork</span></div>
+        <h3>What changed</h3>
+        <p>One person built and now runs a content-complete civic product in about three months — 640 commits, 329 human-reviewed bill summaries, and a social channel that has published 32 posts on its own. It also produced a failure log we'd rather share than hide: provisional tallies that shipped before their "provisional" badge, a search bug that looked like a clean "nothing new", functions that sat committed but undeployed for six days. Most of the engineering went into making those failures loud.</p>
+        <div class="quote">
+          <div class="qt">"AI makes a single person fast, and it makes mistakes that look like success."</div>
+          <div class="qa">Michael Dutton · WE AI</div>
         </div>
       </div>
     </article>
