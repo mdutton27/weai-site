@@ -296,23 +296,25 @@
     stroke-linejoin: round;
     stroke-linecap: round;
     paint-order: stroke fill;
-    stroke-dasharray: var(--l, 4200);
-    stroke-dashoffset: var(--l, 4200);
     fill-opacity: 0;
-    animation: strokeDraw 3.3s cubic-bezier(0.45, 0, 0.25, 1) forwards;
+    animation: sdW1 3.3s cubic-bezier(0.45, 0, 0.25, 1) forwards;
   }
   /* WE rendered at 1.6 *screen* px under non-scaling-stroke; 0.77 user units
      reproduces that weight at desktop and scales like the old text hero did.
      AI never had vector-effect — its 1.6 is already the approved weight. */
   .word-mark .we path { stroke-width: 0.77; }
-  /* draw order: W leads, E follows a beat, AI lands last */
-  .word-mark .we path:first-child { animation-delay: 0.3s; }  /* E is the first path */
-  .word-mark .ai path { animation-delay: 0.55s; }
-  @keyframes strokeDraw {
-    0%   { stroke-dashoffset: var(--l, 4200); fill-opacity: 0; }
-    68%  { stroke-dashoffset: 0;              fill-opacity: 0; }
-    100% { stroke-dashoffset: 0;              fill-opacity: 1; }
-  }
+  /* draw order: W leads, E follows a beat, AI lands last.
+     Safari-proof: per-path keyframes with LITERAL measured lengths —
+     WebKit mishandles var()/calc() inside @keyframes (desynced letters),
+     so each path gets its own keyframe block. --l kept as documentation. */
+  .word-mark .we path:nth-of-type(1) { stroke-dasharray: 977; stroke-dashoffset: 977; animation-name: sdE; animation-delay: 0.3s; }  /* E */
+  .word-mark .we path:nth-of-type(2) { stroke-dasharray: 830; stroke-dashoffset: 830; animation-name: sdW1; }
+  .word-mark .we path:nth-of-type(3) { stroke-dasharray: 813; stroke-dashoffset: 813; animation-name: sdW2; }
+  .word-mark .ai path { stroke-dasharray: 4162; stroke-dashoffset: 4162; animation-name: sdAI; animation-delay: 0.55s; }
+  @keyframes sdE  { 0% { stroke-dashoffset: 977;  fill-opacity: 0; } 68% { stroke-dashoffset: 0; fill-opacity: 0; } 100% { stroke-dashoffset: 0; fill-opacity: 1; } }
+  @keyframes sdW1 { 0% { stroke-dashoffset: 830;  fill-opacity: 0; } 68% { stroke-dashoffset: 0; fill-opacity: 0; } 100% { stroke-dashoffset: 0; fill-opacity: 1; } }
+  @keyframes sdW2 { 0% { stroke-dashoffset: 813;  fill-opacity: 0; } 68% { stroke-dashoffset: 0; fill-opacity: 0; } 100% { stroke-dashoffset: 0; fill-opacity: 1; } }
+  @keyframes sdAI { 0% { stroke-dashoffset: 4162; fill-opacity: 0; } 68% { stroke-dashoffset: 0; fill-opacity: 0; } 100% { stroke-dashoffset: 0; fill-opacity: 1; } }
   @media (prefers-reduced-motion: reduce) {
     .word-mark path {
       animation: none;
